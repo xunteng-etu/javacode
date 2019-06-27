@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.auth.model.mapper.AuthSysCfgMapper">
+
+    <resultMap id="BaseResultMap" type="com.edu.auth.model.entity.AuthSysCfg">
+        <id column="AS_ID" property="asID"/>
+        <result column="CLIENT_NAME" property="clientName"/>
+        <result column="CLIENT_ID" property="clientID"/>
+        <result column="CLIENT_SECRET" property="clientSecret"/>
+        <result column="CLIENT_IP" property="clientIP"/>
+        <result column="SERIAL" property="serial"/>
+        <result column="REMARK" property="remark"/>
+        <result column="SYS_STATUS" property="sysStatus"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="CLIENT_KEY" property="clientKey"/>
+        <result column="VALUE_FLAG" property="valueFlag"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        AS_ID,CLIENT_NAME,CLIENT_ID,CLIENT_SECRET,CLIENT_IP,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,CLIENT_KEY,VALUE_FLAG
+    </sql>
+    <insert id="insert" parameterType="AuthSysCfg">
+        insert into T_AUTH_SYS_CFG
+        (AS_ID,CLIENT_NAME,CLIENT_ID,CLIENT_SECRET,CLIENT_IP,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,CLIENT_KEY,VALUE_FLAG)
+        values (#{asID},#{clientName},#{clientID},
+        #{clientSecret},#{clientIP},#{serial},
+        #{remark},#{sysStatus},#{createTime},
+        #{updateTime},#{clientKey},#{valueFlag})
+    </insert>
+
+    <update id="delete" parameterType="java.lang.String">
+        update T_AUTH_SYS_CFG set VALUE_FLAG = 0 where AS_ID = #{id}
+    </update>
+
+    <update id="update" parameterType="AuthSysCfg">
+        update T_AUTH_SYS_CFG set
+        CLIENT_NAME = #{clientName},
+        CLIENT_IP = #{clientIP},
+        <if test="remark != null and remark != '' ">
+            REMARK = #{remark},
+        </if>
+        UPDATE_TIME = #{updateTime}
+        where AS_ID = #{asID}
+    </update>
+
+    <select id="selectByASID" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_AUTH_SYS_CFG where AS_ID = #{id}
+    </select>
+
+    <select id="selectByClientID" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_AUTH_SYS_CFG where CLIENT_ID = #{clientID}
+    </select>
+
+    <select id="selectByClientSecret" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_AUTH_SYS_CFG where CLIENT_SECRET = #{clientSecret}
+    </select>
+
+    <select id="selectByClientKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_AUTH_SYS_CFG where CLIENT_KEY = #{clientKey}
+    </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_AUTH_SYS_CFG
+        where 1=1
+        <if test="asID != null and asID != ''">
+            and AS_ID = #{asID}
+        </if>
+        <if test="clientName != null and clientName != ''">
+            and CLIENT_NAME = #{clientName}
+        </if>
+        limit #{pageNo},#{pageRow}
+    </select>
+
+    <select id="selectByClientIdAndClientSecret" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from T_AUTH_SYS_CFG where CLIENT_ID = #{clientId} and CLIENT_SECRET = #{clientSecret} and VALUE_FLAG =1
+    </select>
+</mapper>
