@@ -13,6 +13,9 @@
         <module>edu_auth_model</module>
         <module>edu_base</module>
         <module>edu_auth_client</module>
+        <module>edu_sms_model</module>
+        <module>edu_sms_service</module>
+        <module>edu_sms_client</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,6 +25,7 @@
     </properties>
     <dependencyManagement>
         <dependencies>
+        <!--            认证中心-->
             <dependency>
                 <groupId>com.edu</groupId>
                 <artifactId>edu_auth_model</artifactId>
@@ -40,6 +44,22 @@
             <dependency>
                 <groupId>com.edu</groupId>
                 <artifactId>edu_base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!--短信平台-->
+            <dependency>
+                <groupId>com.edu</groupId>
+                <artifactId>edu_sms_model</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.edu</groupId>
+                <artifactId>edu_sms_service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.edu</groupId>
+                <artifactId>edu_sms_client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <!--依赖维护平台,在添加第三方依赖的时候，不需要写版本号，它能够自动帮我们挑选一个最优的版本 -->

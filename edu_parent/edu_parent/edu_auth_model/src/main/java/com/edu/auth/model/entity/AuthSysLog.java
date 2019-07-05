@@ -1,9 +1,9 @@
 package com.edu.auth.model.entity;
 
+import com.edu.base.BaseEntity;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Date;
-import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -12,7 +12,7 @@ import java.util.UUID;
  * @author: BaronLi
  * @create: 2019-06-21 09:36
  */
-public class AuthSysLog {
+public class AuthSysLog extends BaseEntity {
     private String aslID;
     private String asID;
     private Date requestTime;
@@ -20,12 +20,6 @@ public class AuthSysLog {
     private String requestIP;
     private String isAuth;
     private String requestParm;
-    private int serial;
-    private String remark;
-    private String sysStatus;
-    private Date createTime;
-    private Date updateTime;
-    private String valueFlag;
 
     public String getAslID() {
         return aslID;
@@ -81,73 +75,6 @@ public class AuthSysLog {
 
     public void setRequestParm(String requestParm) {
         this.requestParm = requestParm;
-    }
-
-    public int getSerial() {
-        return serial;
-    }
-
-    public void setSerial(int serial) {
-        this.serial = serial;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public String getSysStatus() {
-        return sysStatus;
-    }
-
-    public void setSysStatus(String sysStatus) {
-        this.sysStatus = sysStatus;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public String getValueFlag() {
-        return valueFlag;
-    }
-
-    public void setValueFlag(String valueFlag) {
-        this.valueFlag = valueFlag;
-    }
-
-    @Override
-    public String toString() {
-        return "AuthSysLog{" +
-                "aslID='" + aslID + '\'' +
-                ", asID='" + asID + '\'' +
-                ", requestTime=" + requestTime +
-                ", mkToken='" + mkToken + '\'' +
-                ", requestIP='" + requestIP + '\'' +
-                ", isAuth='" + isAuth + '\'' +
-                ", requestParm='" + requestParm + '\'' +
-                ", serial=" + serial +
-                ", remark='" + remark + '\'' +
-                ", sysStatus='" + sysStatus + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", valueFlag='" + valueFlag + '\'' +
-                '}';
     }
 
     public static void main(String[] args){

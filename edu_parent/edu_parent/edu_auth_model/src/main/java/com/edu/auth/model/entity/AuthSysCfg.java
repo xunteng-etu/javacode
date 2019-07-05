@@ -1,5 +1,7 @@
 package com.edu.auth.model.entity;
 
+import com.edu.base.BaseEntity;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,20 +11,14 @@ import java.util.Date;
  * @author: BaronLi
  * @create: 2019-06-21 09:35
  */
-public class AuthSysCfg implements Serializable {
+public class AuthSysCfg extends BaseEntity implements Serializable {
     private String asID;
     private String clientName;
     private String clientID;
     private String clientSecret;
     private String clientIP;
-    private int serial;
-    private String remark;
-    private String sysStatus;
-    private Date createTime;
-    private Date updateTime;
     private String clientKey;
-    private String valueFlag;
-
+    
     public String getAsID() {
         return asID;
     }
@@ -63,59 +59,11 @@ public class AuthSysCfg implements Serializable {
         this.clientIP = clientIP;
     }
 
-    public int getSerial() {
-        return serial;
-    }
-
-    public void setSerial(int serial) {
-        this.serial = serial;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    public String getSysStatus() {
-        return sysStatus;
-    }
-
-    public void setSysStatus(String sysStatus) {
-        this.sysStatus = sysStatus;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public String getClientKey() {
         return clientKey;
     }
 
     public void setClientKey(String clientKey) {
         this.clientKey = clientKey;
-    }
-
-    public String getValueFlag() {
-        return valueFlag;
-    }
-
-    public void setValueFlag(String valueFlag) {
-        this.valueFlag = valueFlag;
     }
 }

@@ -103,7 +103,7 @@ public class TokenUtils {
         return null;
     }
 
-    //处理解析的业务逻辑
+//    处理解析的业务逻辑
 //    public static JSONObject ValidToken(String token) {
 //        JSONObject jsonObject = null;
 //        //解析token
@@ -141,10 +141,8 @@ public class TokenUtils {
 //        //解析token
 //        JSONObject jsonObject = ValidToken(token);
 //        System.out.println("解析后：" + jsonObject.toString());
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("clientID","123456");
-        map.put("clientSecret","123456");
-        System.out.println(map.toString());
 
+       // List<ProductInfo> productInfos =  productInfoList.stream().filter(productInfo -> productInfo.getIsSalePack()==IS_SALETACK).collect(Collectors.toList());
+       // Map<String,List<ProductInfo>> productInfos =  productInfoList.stream().filter(productInfo -> productInfo.getIsSalePack()==IS_SALETACK).collect(Collectors.groupingBy(ProductInfo::getPackCode));
     }
 }
