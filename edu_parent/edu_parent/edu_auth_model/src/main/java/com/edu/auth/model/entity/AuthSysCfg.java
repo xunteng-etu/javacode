@@ -1,9 +1,8 @@
 package com.edu.auth.model.entity;
 
-import com.edu.base.BaseEntity;
+import com.edu.base.entity.BaseEntity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @program: edu_parent

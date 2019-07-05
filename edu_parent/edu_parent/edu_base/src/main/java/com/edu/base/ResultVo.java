@@ -1,5 +1,7 @@
 package com.edu.base;
 
+import com.edu.base.Constant;
+
 /**
  * @program: edu_parent
  * @description: 统一返回实体类

@@ -1,6 +1,6 @@
 package com.edu.auth.model.entity;
 
-import com.edu.base.BaseEntity;
+import com.edu.base.entity.BaseEntity;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Date;

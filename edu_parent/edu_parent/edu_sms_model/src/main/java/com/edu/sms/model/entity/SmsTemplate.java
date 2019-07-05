@@ -1,8 +1,6 @@
 package com.edu.sms.model.entity;
 
-import com.edu.base.BaseEntity;
-
-import java.util.Date;
+import com.edu.base.entity.BaseEntity;
 
 /**
  * @program: edu_parent

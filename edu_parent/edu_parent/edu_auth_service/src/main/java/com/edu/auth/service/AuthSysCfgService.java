@@ -9,7 +9,6 @@ import com.edu.base.ResultVo;
 import com.edu.utils.*;
 import com.nimbusds.jose.JOSEException;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
