@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author: BaronLi
  * @create: 2019-06-25 13:39
  */
-//@MapperScan("com.edu.sms.model.mapper")
 @SpringBootApplication
 public class SpringbootApplication {
     public static void main (String[] args) {
