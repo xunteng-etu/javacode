@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.Date;
+import java.util.List;
 
 @Mapper
 @Repository
@@ -15,9 +16,12 @@ public interface SmsTemplateMapper {
 
     void update(@Param("stid") String stid, @Param("code") String code,
                 @Param("details") String details, @Param("remark") String remark,
-                @Param("updateTime")Date updateTime);
+                @Param("updateTime") Date updateTime);
 
     void delete(@Param("stid") String stid);
 
     SmsTemplate selectBySTID(@Param("stid") String stid);
+
+    List<SmsTemplate> findAll(@Param("stid") String stid, @Param("code") String code,
+                             @Param("pageNo") Integer pageNo, @Param("pageRow") Integer pageRow);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @program: edu_parent
@@ -81,7 +82,7 @@ public class SmsTemplateService {
             return resultVo;
         }
         try {
-            smsTemplateMapper.update(stid, code, details, remark,new Date());
+            smsTemplateMapper.update(stid, code, details, remark, new Date());
             resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
             resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
             return resultVo;
@@ -139,6 +140,34 @@ public class SmsTemplateService {
         } catch (Exception e) {
             resultVo.setRt_code(Constant.RESULT_CODE_WONGSYSTEM);
             resultVo.setRt_msg(Constant.RESULT_MSG_WONGSYSTEM);
+            return resultVo;
+        }
+    }
+
+    /**
+     * 分页查询所有
+     *
+     * @param stid    短信模板标识
+     * @param code    短信平台模板编号
+     * @param pageNo  页码，为空时默认第一页
+     * @param pageRow 一页行数，为空时默认30行
+     * @return
+     */
+    public ResultVo findAll(String stid, String code, Integer pageNo, Integer pageRow) {
+        ResultVo resultVo = new ResultVo();
+        if (pageNo == null) {
+            pageNo = 0;
+        }
+        if (pageRow == null || pageRow <= 0) {
+            pageRow = 30;
+        }
+        try {
+            List<SmsTemplate> smsTemplates = smsTemplateMapper.findAll(stid, code, pageNo - 1 < 0 ? 0 : (pageNo - 1) * pageRow, pageRow);
+            resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
+            resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
+            resultVo.setRt_data(smsTemplates);
+            return resultVo;
+        } catch (Exception e) {
             return resultVo;
         }
     }

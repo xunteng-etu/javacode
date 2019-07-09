@@ -21,27 +21,12 @@ public class SmsTemplateController {
     private SmsTemplateService smsTemplateService;
 
     /**
-     * 新增
-     *
-     * @param code    短信平台模板编号
-     * @param details 短信模板内容
-     * @param remark  备注
-     * @return
-     */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResultVo add(@RequestParam(value = "code", defaultValue = "") String code,
-                        @RequestParam(value = "details", defaultValue = "") String details,
-                        @RequestParam(value = "remark", defaultValue = "") String remark) {
-        return smsTemplateService.add(code, details, remark);
-    }
-
-    /**
      * 删除（逻辑删除）
      *
      * @param stid 短信模板标识
      * @return
      */
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    @RequestMapping(method = RequestMethod.DELETE)
     public ResultVo delete(@RequestParam(value = "stid", defaultValue = "") String stid) {
         return smsTemplateService.delete(stid);
     }
@@ -66,11 +51,34 @@ public class SmsTemplateController {
      * @param stid    短信模板标识
      * @return
      */
-    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @RequestMapping(method = RequestMethod.PUT)
     public ResultVo update(@RequestParam(value = "code", defaultValue = "") String code,
                            @RequestParam(value = "details", defaultValue = "") String details,
                            @RequestParam(value = "remark", defaultValue = "") String remark,
                            @RequestParam(value = "stid", defaultValue = "") String stid) {
-        return smsTemplateService.update(stid, code, details, remark);
+        if(!"".equals(stid)){
+            return smsTemplateService.update(stid, code, details, remark);
+        }else {
+            return smsTemplateService.add(code, details, remark);
+        }
+
+    }
+
+    /**
+     * 分页查询短信模板
+     *
+     * @param stid    短信模板标识
+     * @param code    短信平台模板编号
+     * @param pageNo  页码，为空时默认第一页
+     * @param pageRow 一页行数，为空时默认30行
+     * @return
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public ResultVo findAll(@RequestParam(value = "stid", defaultValue = "") String stid,
+                            @RequestParam(value = "code", defaultValue = "") String code,
+                            @RequestParam(value = "pageNo", defaultValue = "") Integer pageNo,
+                            @RequestParam(value = "pageRow", defaultValue = "") Integer pageRow) {
+        return smsTemplateService.findAll(stid, code, pageNo, pageRow);
+
     }
 }

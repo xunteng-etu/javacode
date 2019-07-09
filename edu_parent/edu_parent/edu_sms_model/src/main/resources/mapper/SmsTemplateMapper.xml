@@ -45,4 +45,18 @@
         from t_sms_template
         where ST_ID=#{stid}
     </select>
+
+    <select id="findAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_template
+        where 1=1
+        <if test="stid != null and stid != ''">
+            and ST_ID = #{stid}
+        </if>
+        <if test="code != null and code != ''">
+            and CODE = #{code}
+        </if>
+        limit #{pageNo},#{pageRow}
+    </select>
 </mapper>
