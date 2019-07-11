@@ -57,4 +57,14 @@ public class RandomUtils {
     public static String GET_RANDOMSTRING(Integer number) {
         return RandomStringUtils.randomAlphanumeric(number);
     }
+
+    /**
+     * 根据指定位数获取相对于位数的随机数
+     *
+     * @param number 生成位数
+     * @return
+     */
+    public static String GET_RANDOMNUMBER(Integer number) {
+        return RandomStringUtils.randomNumeric(number);
+    }
 }
