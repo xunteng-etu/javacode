@@ -29,4 +29,11 @@
         #{requestIP},#{isAuth},#{requestParm},#{serial},#{remark},
         #{sysStatus},#{createTime},#{updateTime},#{valueFlag})
     </insert>
+
+    <select id="selectByASL_ID" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_auth_sys_log
+        where ASL_ID = #{aslID}
+    </select>
 </mapper>

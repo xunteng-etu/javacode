@@ -1,4 +1,4 @@
-D:\IdeaProjects\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\SpringbootApplication.java
-D:\IdeaProjects\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\entity\AuthSysCfg.java
-D:\IdeaProjects\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\entity\AuthSysLog.java
-D:\IdeaProjects\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\mapper\AuthSysCfgMapper.java
+D:\XT_Code\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\entity\AuthSysLog.java
+D:\XT_Code\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\mapper\AuthSysCfgMapper.java
+D:\XT_Code\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\entity\AuthSysCfg.java
+D:\XT_Code\edu_parent\edu_parent\edu_auth_model\src\main\java\com\edu\auth\model\mapper\AuthSysLogMapper.java

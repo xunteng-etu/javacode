@@ -1,4 +1,3 @@
 com\edu\auth\model\mapper\AuthSysCfgMapper.class
-com\edu\auth\model\SpringbootApplication.class
 com\edu\auth\model\entity\AuthSysCfg.class
 com\edu\auth\model\entity\AuthSysLog.class
