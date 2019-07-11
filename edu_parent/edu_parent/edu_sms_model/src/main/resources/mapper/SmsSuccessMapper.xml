@@ -18,11 +18,11 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        S_ID,AS_ID,ST_ID,TELEPHONE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
+        S_ID,AS_ID,ST_ID,TELEPHONE,TEMPLATEPARAM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
     </sql>
 
     <insert id="insert" parameterType="SmsBase">
-        insert into t_sms_success(S_ID,AS_ID,ST_ID,TELEPHONE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
+        insert into t_sms_success(S_ID,AS_ID,ST_ID,TELEPHONE,TEMPLATEPARAM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
         values (#{sid},#{asid},#{stid},#{telephone},#{templateparam},0,#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
     </insert>
 

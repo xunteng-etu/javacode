@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.edu.sms.model.mapper.SmsSuccessMapper">
+<mapper namespace="com.edu.sms.model.mapper.SmsWaitMapper">
 
     <resultMap id="BaseResultMap" type="com.edu.sms.model.entity.SmsBase">
         <id column="S_ID" property="sid"/>
@@ -18,12 +18,12 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        S_ID,AS_ID,ST_ID,TELEPHONE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
+        S_ID,AS_ID,ST_ID,TELEPHONE,TEMPLATEPARAM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
     </sql>
 
     <insert id="insert" parameterType="SmsBase">
-        insert into t_sms_wait(S_ID,AS_ID,ST_ID,TELEPHONE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
-        values (#{sid},#{asid},#{stid},#{telephone},#{templateparam},0,#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+        insert into t_sms_wait(S_ID,AS_ID,ST_ID,TELEPHONE,TEMPLATEPARAM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
+        values (#{sid},#{asid},#{stid},#{telephone},#{templateparam},'0',#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
     </insert>
 
     <select id="selectBySid" parameterType="java.lang.String" resultMap="BaseResultMap">
