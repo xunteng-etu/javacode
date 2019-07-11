@@ -23,7 +23,7 @@
             insert into t_sms_template
                 (ST_ID,CODE,DETAILS,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
             values
-                (#{stid},#{code},#{details},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+                (#{stid},#{code},#{details},0,#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
         </insert>
 
         <update id="update" parameterType="java.lang.String">
