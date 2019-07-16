@@ -9,7 +9,18 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface SmsSuccessMapper {
 
+    /**
+     * 新增
+     *
+     * @param smsBase
+     */
     void insert(SmsBase smsBase);
 
+    /**
+     * 根据ID查询
+     *
+     * @param sid
+     * @return
+     */
     SmsBase selectBySid(@Param("sid") String sid);
 }

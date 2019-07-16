@@ -12,9 +12,10 @@ public class SmsBase extends BaseEntity {
 
     private String sid;
     private String asid;
-    private String stid;
     private String telephone;
     private String templateparam;
+    private String signname;
+    private String templatecode;
 
     public String getSid() {
         return sid;
@@ -30,14 +31,6 @@ public class SmsBase extends BaseEntity {
 
     public void setAsid(String asid) {
         this.asid = asid;
-    }
-
-    public String getStid() {
-        return stid;
-    }
-
-    public void setStid(String stid) {
-        this.stid = stid;
     }
 
     public String getTelephone() {
@@ -56,4 +49,19 @@ public class SmsBase extends BaseEntity {
         this.templateparam = templateparam;
     }
 
+    public String getSignname() {
+        return signname;
+    }
+
+    public void setSignname(String signname) {
+        this.signname = signname;
+    }
+
+    public String getTemplatecode() {
+        return templatecode;
+    }
+
+    public void setTemplatecode(String templatecode) {
+        this.templatecode = templatecode;
+    }
 }

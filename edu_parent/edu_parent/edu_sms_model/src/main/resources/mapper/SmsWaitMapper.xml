@@ -6,9 +6,10 @@
     <resultMap id="BaseResultMap" type="com.edu.sms.model.entity.SmsBase">
         <id column="S_ID" property="sid"/>
         <result column="AS_ID" property="asid"/>
-        <result column="ST_ID" property="stid"/>
         <result column="TELEPHONE" property="telephone"/>
         <result column="TEMPLATEPARAM" property="templateparam"/>
+        <result column="SIGNNAME" property="signname"/>
+        <result column="TEMPLATECODE" property="templatecode"/>
         <result column="SERIAL" property="serial"/>
         <result column="REMARK" property="remark"/>
         <result column="SYS_STATUS" property="sysStatus"/>
@@ -18,12 +19,12 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        S_ID,AS_ID,ST_ID,TELEPHONE,TEMPLATEPARAM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
+        S_ID,AS_ID,TELEPHONE,TEMPLATEPARAM,SIGNNAME,TEMPLATECODE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
     </sql>
 
     <insert id="insert" parameterType="SmsBase">
-        insert into t_sms_wait(S_ID,AS_ID,ST_ID,TELEPHONE,TEMPLATEPARAM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
-        values (#{sid},#{asid},#{stid},#{telephone},#{templateparam},'0',#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+        insert into t_sms_wait(S_ID,AS_ID,TELEPHONE,TEMPLATEPARAM,SIGNNAME,TEMPLATECODE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
+        values (#{sid},#{asid},#{telephone},#{templateparam},#{signname},#{templatecode},'0',#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
     </insert>
 
     <select id="selectBySid" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -31,4 +32,18 @@
         <include refid="Base_Column_List"/>
         from t_sms_wait where S_ID = #{sid}
     </select>
+
+    <update id="updateSysStatus" parameterType="java.lang.String">
+        update t_sms_wait set SYS_STATUS = #{sysStatus} where S_ID = #{sid}
+    </update>
+
+    <select id="selectBySysStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_wait where SYS_STATUS = #{sysStatus} limit #{count}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete t_sms_wait where S_ID = #{sid}
+    </delete>
 </mapper>

@@ -45,25 +45,25 @@ public class SendSmsService {
      * 发送短信
      *
      * @param asid          接入系统标识
-     * @param stid          短信模板ID
+     * @param templatecode  短信模板ID
      * @param telephone     接收手机号
      * @param signName      短信签名名称
      * @param templateParam 短信模板变量对应的实际值，JSON格式
      * @param type          1:即时发送，3：延迟发送
      * @return
      */
-    public ResultVo send(String asid, String stid, String telephone, String signName, String templateParam, String type) {
+    public ResultVo send(String asid, String templatecode, String telephone, String signName, String templateParam, String type) {
         ResultVo resultVo = new ResultVo();
-        if ("".equals(asid) || "".equals(stid) || "".equals(telephone)
+        if ("".equals(asid) || "".equals(templatecode) || "".equals(telephone)
                 || "".equals(type) || "".equals(signName) || "".equals(templateParam)) {
             resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
             resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
             return resultVo;
         }
         if ("1".equals(type)) {
-            return sendSms(asid, stid, telephone, signName, templateParam);
+            return sendSms(asid, templatecode, telephone, signName, templateParam);
         } else if ("3".equals(type)) {
-            return addSmsWait(asid, stid, telephone, templateParam);
+            return addSmsWait(asid, signName, templatecode, telephone, templateParam);
         } else {
             resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
             resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
@@ -75,13 +75,13 @@ public class SendSmsService {
      * 短信即时发送接口
      *
      * @param asid          接入系统标识
-     * @param stid          短信模板ID
+     * @param templatecode  短信模板ID
      * @param telephone     接收手机号
      * @param signName      短信签名名称
      * @param templateParam 短信模板变量对应的实际值，JSON格式
      * @return
      */
-    public ResultVo sendSms(String asid, String stid, String telephone, String signName, String templateParam) {
+    public ResultVo sendSms(String asid, String templatecode, String telephone, String signName, String templateParam) {
         ResultVo resultVo = new ResultVo();
 
         DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
@@ -94,7 +94,7 @@ public class SendSmsService {
         request.setAction(sendSmsAction);
         request.putQueryParameter("PhoneNumbers", telephone);
         request.putQueryParameter("SignName", signName);
-        request.putQueryParameter("TemplateCode", stid);
+        request.putQueryParameter("TemplateCode", templatecode);
         request.putQueryParameter("TemplateParam", templateParam);
         String sid = RandomUtils.GET_RANDOMSTRING(12);
         try {
@@ -107,25 +107,26 @@ public class SendSmsService {
             }
             smsBase.setSid(sid);
             smsBase.setAsid(asid);
-            smsBase.setStid(stid);
+            smsBase.setTemplatecode(templatecode);
+            smsBase.setSignname(signName);
             smsBase.setTelephone(telephone);
             smsBase.setTemplateparam(templateParam);
             smsBase.setRemark("发送成功");
             smsBase.setSysStatus("3");
             smsBase.setCreateTime(new Date());
             smsBase.setValueFlag("1");
+            smsSuccessMapper.insert(smsBase);
             resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
             resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
         } catch (Exception e) {
             SmsError smsError = new SmsError();
-            //String sid = RandomUtils.GET_RANDOMSTRING(12);
             SmsError checkSid = smsErrorMapper.selectBySid(sid);
             if (checkSid != null) {
                 sid = RandomUtils.GET_RANDOMSTRING(12);
             }
             smsError.setSid(sid);
             smsError.setAsid(asid);
-            smsError.setStid(stid);
+            smsError.setTemplatecode(templatecode);
             smsError.setTelephone(telephone);
             smsError.setCode("错误码");
             smsError.setMessage("错误信息");
@@ -135,6 +136,7 @@ public class SendSmsService {
             smsError.setSysStatus("5");
             smsError.setCreateTime(new Date());
             smsError.setValueFlag("1");
+            smsErrorMapper.insert(smsError);
             resultVo.setRt_code(Constant.RESULT_CODE_WONGSYSTEM);
             resultVo.setRt_msg(Constant.RESULT_MSG_WONGSYSTEM);
             e.printStackTrace();
@@ -146,12 +148,13 @@ public class SendSmsService {
      * 添加到待发送表
      *
      * @param asid          接入系统标识
-     * @param stid          短信模板ID
+     * @param signName      短信签名名称
+     * @param templatecode  短信模板ID
      * @param telephone     接收手机号
      * @param templateParam 短信模板变量对应的实际值，JSON格式
      * @return
      */
-    public ResultVo addSmsWait(String asid, String stid, String telephone, String templateParam) {
+    public ResultVo addSmsWait(String asid, String signName, String templatecode, String telephone, String templateParam) {
         ResultVo resultVo = new ResultVo();
         String sid = RandomUtils.GET_RANDOMSTRING(12);
         SmsBase checkSid = smsWaitMapper.selectBySid(sid);
@@ -162,7 +165,8 @@ public class SendSmsService {
             SmsBase smsBase = new SmsBase();
             smsBase.setAsid(asid);
             smsBase.setSid(sid);
-            smsBase.setStid(stid);
+            smsBase.setSignname(signName);
+            smsBase.setTemplatecode(templatecode);
             smsBase.setTelephone(telephone);
             smsBase.setTemplateparam(templateParam);
             smsBase.setSysStatus("0");
