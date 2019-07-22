@@ -9,16 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>edu_auth_service</artifactId>
-
+    <artifactId>edu_auth_dao</artifactId>
     <dependencies>
+        <!--        mysql-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <dependency>
             <groupId>com.edu</groupId>
-            <artifactId>edu_auth_dao</artifactId>
+            <artifactId>edu_auth_model</artifactId>
         </dependency>
         <dependency>
             <groupId>com.edu</groupId>
             <artifactId>edu_base</artifactId>
         </dependency>
     </dependencies>
+
 </project>

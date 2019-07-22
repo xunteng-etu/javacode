@@ -13,11 +13,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>com.edu</groupId>
             <artifactId>edu_base</artifactId>
         </dependency>

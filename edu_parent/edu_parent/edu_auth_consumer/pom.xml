@@ -9,16 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>edu_auth_service</artifactId>
-
+    <artifactId>edu_auth_consumer</artifactId>
     <dependencies>
         <dependency>
             <groupId>com.edu</groupId>
-            <artifactId>edu_auth_dao</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.edu</groupId>
-            <artifactId>edu_base</artifactId>
+            <artifactId>edu_auth_model</artifactId>
         </dependency>
     </dependencies>
+
 </project>

@@ -2,8 +2,8 @@ package com.edu.auth.service;
 
 import com.edu.auth.model.entity.AuthSysCfg;
 import com.edu.auth.model.entity.AuthSysLog;
-import com.edu.auth.model.mapper.AuthSysCfgMapper;
-import com.edu.auth.model.mapper.AuthSysLogMapper;
+import com.edu.auth.dao.mapper.AuthSysCfgMapper;
+import com.edu.auth.dao.mapper.AuthSysLogMapper;
 import com.edu.base.Constant;
 import com.edu.base.ResultVo;
 import com.edu.utils.*;

@@ -1,4 +1,4 @@
-package com.edu.auth.model.mapper;
+package com.edu.auth.dao.mapper;
 
 import com.edu.auth.model.entity.AuthSysLog;
 import org.apache.ibatis.annotations.Mapper;

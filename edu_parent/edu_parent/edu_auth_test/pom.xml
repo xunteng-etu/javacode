@@ -9,16 +9,23 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>edu_auth_service</artifactId>
+    <artifactId>edu_auth_test</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.edu</groupId>
-            <artifactId>edu_auth_dao</artifactId>
+            <artifactId>edu_auth_consumer</artifactId>
         </dependency>
         <dependency>
             <groupId>com.edu</groupId>
             <artifactId>edu_base</artifactId>
         </dependency>
+        <!--        dubbo相关依赖-->
+        <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>dubbo-spring-boot-starter</artifactId>
+            <version>0.2.0</version>
+        </dependency>
     </dependencies>
+
 </project>
