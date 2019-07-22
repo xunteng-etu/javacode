@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6bdb6fce-f9bd-4f26-a00a-8a42d5a8587f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/edu_auth_dubbo/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/dubbo/service/AuthSysCfgService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/dubbo/service/impl/AuthSysCfgServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/edu_auth_dubbo/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edu_auth_client/src/main/java/com/edu/SpringbootApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/edu_auth_client/src/main/java/com/edu/SpringbootApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edu_auth_client/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/edu_auth_model/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edu_auth_model/src/main/java/com/edu/auth/model/mapper/AuthSysCfgMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/edu_auth_model/src/main/java/com/edu/auth/model/mapper/AuthSysCfgMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/edu_auth_model/src/main/java/com/edu/auth/model/mapper/AuthSysLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/edu_auth_model/src/main/java/com/edu/auth/model/mapper/AuthSysLogMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/dubbo/SpringbootApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/edu_auth_model/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/edu_auth_model/src/main/resources/application.properties" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -52,25 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/dubbo/SpringbootApplication.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="233">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#352#353#0" expanded="true" />
-                <element signature="e#424#425#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/edu_auth_dubbo/src/main/resources/application.properties">
+        <entry file="file://$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/SpringbootApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="16" selection-start-column="16" selection-end-column="16" />
+            <state relative-caret-position="161">
+              <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -115,7 +94,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/edu_auth_service/src/main/java/com/edu/auth/service/AuthSysCfgService.java" />
         <option value="$PROJECT_DIR$/edu_base/src/main/java/com/edu/utils/Test.java" />
         <option value="$PROJECT_DIR$/edu_base/src/main/java/com/edu/utils/SignUtils.java" />
         <option value="$PROJECT_DIR$/edu_base/src/main/java/com/edu/utils/TokenUtils.java" />
@@ -125,7 +103,6 @@
         <option value="$PROJECT_DIR$/edu_auth_model/src/main/java/com/edu/auth/model/entity/AuthSysCfg.java" />
         <option value="$PROJECT_DIR$/edu_base/pom.xml" />
         <option value="$PROJECT_DIR$/edu_auth_model/pom.xml" />
-        <option value="$PROJECT_DIR$/edu_auth_model/src/main/resources/application.properties" />
         <option value="$PROJECT_DIR$/edu_sms_client/pom.xml" />
         <option value="$PROJECT_DIR$/edu_sms_model/src/main/java/com/edu/sms/model/mapper/SendMsm.java" />
         <option value="$PROJECT_DIR$/edu_sms_model/src/main/java/com/edu/sms/model/mapper/SendMsm2.java" />
@@ -166,6 +143,8 @@
         <option value="$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/dubbo/service/impl/AuthSysCfgServiceImpl.java" />
         <option value="$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/dubbo/SpringbootApplication.java" />
         <option value="$PROJECT_DIR$/edu_auth_dubbo/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/edu_auth_model/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/SpringbootApplication.java" />
       </list>
     </option>
   </component>
@@ -245,7 +224,21 @@
               <item name="edu_auth_dubbo" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="edu_parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="edu_parent" type="462c0819:PsiDirectoryNode" />
+              <item name="edu_auth_dubbo" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="edu_parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="edu_parent" type="462c0819:PsiDirectoryNode" />
+              <item name="edu_auth_model" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -304,7 +297,7 @@
         </RuleState>
       </list>
     </option>
-    <option name="contentProportion" value="0.18101093" />
+    <option name="contentProportion" value="0.13046448" />
   </component>
   <component name="RunManager" selected="Spring Boot.SpringbootApplication (1)">
     <configuration name="SmsTemplateController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -510,7 +503,7 @@
       <workItem from="1563325240566" duration="1205000" />
       <workItem from="1563343781165" duration="52000" />
       <workItem from="1563413612584" duration="375000" />
-      <workItem from="1563757788316" duration="4471000" />
+      <workItem from="1563757788316" duration="4743000" />
     </task>
     <task id="LOCAL-00001" summary="Start">
       <created>1560933157022</created>
@@ -624,11 +617,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563241390177</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="1">
+      <created>1563762313197</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1563762313197</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="283608000" />
+    <option name="totallyTimeSpent" value="283880000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -666,7 +666,7 @@
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.3286119" />
       <window_info anchor="bottom" id="Messages" order="14" weight="0.4490085" />
-      <window_info anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.305949" />
+      <window_info anchor="bottom" id="Run Dashboard" order="15" visible="true" weight="0.19263457" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -736,13 +736,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.5.RELEASE/spring-web-5.0.5.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/edu_sms_model/src/main/resources/mapper/fuck.fxml" />
     <entry file="file://$PROJECT_DIR$/edu_sms_client/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1014,13 +1007,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edu_auth_model/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
@@ -1145,10 +1131,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/edu_auth_model/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/edu_auth_dubbo/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="23">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/dubbo/SpringbootApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        <state relative-caret-position="244">
+          <caret line="11" column="22" lean-forward="true" selection-start-line="11" selection-start-column="22" selection-end-line="11" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#352#353#0" expanded="true" />
@@ -1157,10 +1153,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/edu_auth_dubbo/src/main/resources/application.properties">
+    <entry file="file://$PROJECT_DIR$/edu_auth_dubbo/src/main/java/com/edu/auth/SpringbootApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
+        <state relative-caret-position="161">
+          <caret line="8" column="19" lean-forward="true" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -1216,7 +1212,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>edu_auth_dubbo</last-edited>
+          <last-edited>edu_auth_service</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
