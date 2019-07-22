@@ -16,6 +16,10 @@
             <groupId>com.edu</groupId>
             <artifactId>edu_auth_service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu_auth_model</artifactId>
+        </dependency>
         <!--        dubbo相关依赖-->
         <dependency>
             <groupId>com.alibaba.boot</groupId>
