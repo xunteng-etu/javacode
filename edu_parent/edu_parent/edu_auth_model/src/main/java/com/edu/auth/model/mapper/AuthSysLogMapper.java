@@ -1,10 +1,12 @@
 package com.edu.auth.model.mapper;
 
 import com.edu.auth.model.entity.AuthSysLog;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
+@Mapper
 public interface AuthSysLogMapper {
     /**
      * 新增

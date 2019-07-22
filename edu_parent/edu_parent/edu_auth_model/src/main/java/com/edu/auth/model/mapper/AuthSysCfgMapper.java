@@ -1,6 +1,7 @@
 package com.edu.auth.model.mapper;
 
 import com.edu.auth.model.entity.AuthSysCfg;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
+@Mapper
 public interface AuthSysCfgMapper {
     /**
      * 新增
