@@ -11,6 +11,7 @@
         <module name="edu_sms_client" />
         <module name="edu_auth_model" />
         <module name="edu_sms_model" />
+        <module name="edu_auth_dubbo" />
         <module name="edu_base" />
         <module name="edu_auth_client" />
       </profile>
