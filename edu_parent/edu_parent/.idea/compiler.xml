@@ -9,16 +9,21 @@
         <module name="edu_sms_service" />
         <module name="edu_auth_service" />
         <module name="edu_sms_client" />
+        <module name="edu_auth_dao" />
+        <module name="edu_auth_test" />
         <module name="edu_auth_model" />
+        <module name="edu_sms_dubbo" />
         <module name="edu_sms_model" />
         <module name="edu_auth_dubbo" />
         <module name="edu_base" />
         <module name="edu_auth_client" />
+        <module name="edu_sms_dao" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="edu_auth" target="1.5" />
       <module name="edu_auth_client1" target="1.5" />
+      <module name="edu_auth_consumer" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>
