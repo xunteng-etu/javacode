@@ -203,10 +203,10 @@ public class AuthSysCfgService {
      * @param clientId     clientId
      * @param clientSecret clientSecret
      * @param sign         sign
-     * @param request
+     * @param ip    ip
      * @return
      */
-    public ResultVo getToken(String clientId, String clientSecret, String sign, HttpServletRequest request) {
+    public ResultVo getToken(String clientId, String clientSecret, String sign, String ip) {
         //请求参数
         Map<String, Object> logMap = new HashMap<String, Object>();
         logMap.put("clientId", clientId);
@@ -222,7 +222,7 @@ public class AuthSysCfgService {
         }
         log.setAslID(asl_id);
         log.setRequestTime(new Date());
-        log.setRequestIP(IpUtils.getIpAddress(request));
+        log.setRequestIP(ip);
         log.setRequestParm(logMap.toString());
         log.setSerial(0);
         log.setSysStatus("0");
@@ -265,10 +265,8 @@ public class AuthSysCfgService {
             resultVo.setRt_msg(Constant.RESULT_MSG_WONGSIGN);
             return resultVo;
         }
-        //请求的IP地址
-        String requestIP = IpUtils.getIpAddress(request);
         //校验IP是否有效
-        if (!ArrayUtils.contains(authSysCfg.getClientIP().split(","), requestIP)) {
+        if (!ArrayUtils.contains(authSysCfg.getClientIP().split(","), ip)) {
             log.setRemark("非法IP地址");
             log.setIsAuth("0");
             authSysLogMapper.insert(log);

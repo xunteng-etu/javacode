@@ -40,9 +40,9 @@ public class SignUtils {
 
     public static void main(String[] ages) {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("client_id", "12345");
-        map.put("client_secret", "123456");
-        String key = "f924f68726924ec0a827deac0896a4ff";
+        map.put("client_id", "aAeDPw6Fk7I1");
+        map.put("client_secret", "qhmrsxNAWwRFDwH12qGE2vA3T66y5bWh");
+        String key = "39BBEDCA5C3D4D0CB7881C1E3D91246E";
         System.out.println(SignUtils.getSign(map, key));
     }
 }

@@ -20,7 +20,7 @@ public class TestController {
     private AuthSysCfgService authSysCfgService;
 
     @RequestMapping("test")
-    public ResultVo test(@RequestParam(value = "asid") String asid){
+    public ResultVo test(@RequestParam(value = "asid") String asid) {
         return authSysCfgService.selectByASID(asid);
     }
 }

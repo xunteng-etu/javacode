@@ -14,7 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>com.edu</groupId>
-            <artifactId>edu_auth_consumer</artifactId>
+            <artifactId>edu_auth_client</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu_sms_client</artifactId>
         </dependency>
         <dependency>
             <groupId>com.edu</groupId>

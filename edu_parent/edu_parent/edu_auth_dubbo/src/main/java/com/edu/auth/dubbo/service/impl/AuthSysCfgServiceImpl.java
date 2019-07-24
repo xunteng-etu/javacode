@@ -39,8 +39,8 @@ public class AuthSysCfgServiceImpl implements AuthSysCfgService {
         return authSysCfgService.findAll(asID, clientName, pageNo, pageRow);
     }
 
-    public ResultVo getToken(String clientId, String clientSecret, String sign, HttpServletRequest request) {
-        return authSysCfgService.getToken(clientId, clientSecret, sign, request);
+    public ResultVo getToken(String clientId, String clientSecret, String sign,String ip) {
+        return authSysCfgService.getToken(clientId, clientSecret, sign,ip);
     }
 
     public ResultVo checkToken(String token) {

@@ -3,6 +3,7 @@ package com.edu.auth.model.entity;
 import com.edu.base.entity.BaseEntity;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
  * @author: BaronLi
  * @create: 2019-06-21 09:36
  */
-public class AuthSysLog extends BaseEntity {
+public class AuthSysLog extends BaseEntity implements Serializable  {
     private String aslID;
     private String asID;
     private Date requestTime;

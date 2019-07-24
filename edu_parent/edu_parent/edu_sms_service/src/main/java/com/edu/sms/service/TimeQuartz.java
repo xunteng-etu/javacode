@@ -174,9 +174,4 @@ public class TimeQuartz {
             }
         }
     }
-
-    @Scheduled(cron = "0 0/1 9-21 * * ?")//早上九点到晚上九点，每1分钟执行一次
-    public void print() {
-        System.out.println("打印："+new Date());
-    }
 }

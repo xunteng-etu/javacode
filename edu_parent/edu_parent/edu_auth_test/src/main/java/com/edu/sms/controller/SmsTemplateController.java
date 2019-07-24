@@ -1,10 +1,8 @@
-package com.edu.sms.client.controller;
+package com.edu.sms.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.edu.base.ResultVo;
-import com.edu.sms.service.SmsTemplateService;
-import com.edu.utils.RandomUtils;
-import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.edu.sms.dubbo.service.SmsTemplateService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/smsTemplate")
 public class SmsTemplateController {
-    @Autowired
+    @Reference
     private SmsTemplateService smsTemplateService;
 
     /**

@@ -59,10 +59,10 @@ public interface AuthSysCfgService {
      * @param clientId     clientId
      * @param clientSecret clientSecret
      * @param sign         sign
-     * @param request
+     * @param
      * @return
      */
-    ResultVo getToken(String clientId, String clientSecret, String sign, HttpServletRequest request);
+    ResultVo getToken(String clientId, String clientSecret, String sign,String ip);
 
     /**
      * 校验token
