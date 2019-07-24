@@ -3,11 +3,10 @@ package com.edu.sms.service;
 import com.edu.base.Constant;
 import com.edu.base.ResultVo;
 import com.edu.sms.model.entity.SmsTemplate;
-import com.edu.sms.model.mapper.SmsTemplateMapper;
+import com.edu.sms.dao.mapper.SmsTemplateMapper;
 import com.edu.utils.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;

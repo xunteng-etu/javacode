@@ -14,17 +14,34 @@
     <dependencies>
         <dependency>
             <groupId>com.edu</groupId>
+            <artifactId>edu_sms_dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
             <artifactId>edu_sms_model</artifactId>
         </dependency>
         <dependency>
             <groupId>com.edu</groupId>
             <artifactId>edu_base</artifactId>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.aliyun</groupId>-->
+<!--            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>-->
+<!--            <version>1.1.0</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.aliyun</groupId>
-            <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
-            <version>1.1.0</version>
+            <artifactId>aliyun-java-sdk-core</artifactId>
+            <version>4.1.0</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
+        </dependency>
+
     </dependencies>
 
 </project>

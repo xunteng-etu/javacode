@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.sms.dao.mapper.SmsErrorMapper">
+
+    <resultMap id="BaseResultMap" type="com.edu.sms.model.entity.SmsError">
+        <id column="S_ID" property="sid"/>
+        <result column="AS_ID" property="asid"/>
+        <result column="TELEPHONE" property="telephone"/>
+        <result column="TEMPLATEPARAM" property="templateparam"/>
+        <result column="COUNT_FAIL" property="countFail"/>
+        <result column="CODE" property="code"/>
+        <result column="MESSAGE" property="message"/>
+        <result column="SIGNNAME" property="signname"/>
+        <result column="TEMPLATECODE" property="templatecode"/>
+        <result column="SERIAL" property="serial"/>
+        <result column="REMARK" property="remark"/>
+        <result column="SYS_STATUS" property="sysStatus"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="VALUE_FLAG" property="valueFlag"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        S_ID,AS_ID,TELEPHONE,TEMPLATEPARAM,COUNT_FAIL,CODE,MESSAGE,SIGNNAME,TEMPLATECODE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
+    </sql>
+
+    <insert id="insert" parameterType="SmsError">
+        insert into t_sms_error(S_ID,AS_ID,TELEPHONE,TEMPLATEPARAM,COUNT_FAIL,CODE,MESSAGE,SIGNNAME,TEMPLATECODE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
+        values (#{sid},#{asid},#{telephone},#{templateparam},#{countFail},#{code},#{message},#{signname},#{templatecode},0,#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+    </insert>
+
+    <select id="selectBySid" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_error where S_ID = #{sid}
+    </select>
+
+    <select id="selectBySysStatus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_sms_error where SYS_STATUS = #{sysStatus} and COUNT_FAIL &lt;3 limit #{count}
+    </select>
+
+    <update id="updateSysStatus" parameterType="java.lang.String">
+        update t_sms_error set SYS_STATUS = #{sysStatus} where S_ID = #{sid}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from t_sms_error where S_ID = #{sid}
+    </delete>
+
+    <update id="updateCountFail">
+        update t_sms_error set COUNT_FAIL = #{countFail},SYS_STATUS = 5 where S_ID = #{sid}
+    </update>
+</mapper>

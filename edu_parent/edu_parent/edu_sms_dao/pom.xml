@@ -9,15 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>edu_sms_model</artifactId>
+    <artifactId>edu_sms_dao</artifactId>
 
     <dependencies>
-
         <dependency>
             <groupId>com.edu</groupId>
             <artifactId>edu_base</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu_sms_model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
 </project>

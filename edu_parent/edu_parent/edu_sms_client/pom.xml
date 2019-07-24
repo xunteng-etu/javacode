@@ -16,14 +16,6 @@
             <groupId>com.edu</groupId>
             <artifactId>edu_sms_model</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.edu</groupId>
-            <artifactId>edu_sms_service</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.edu</groupId>
-            <artifactId>edu_base</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

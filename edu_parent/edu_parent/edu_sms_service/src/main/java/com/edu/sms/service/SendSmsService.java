@@ -1,5 +1,6 @@
 package com.edu.sms.service;
 
+import com.alibaba.fastjson.JSON;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
@@ -8,16 +9,17 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.edu.base.Constant;
 import com.edu.base.ResultVo;
+import com.edu.sms.dao.mapper.SmsSuccessMapper;
+import com.edu.sms.dao.mapper.SmsWaitMapper;
 import com.edu.sms.model.entity.SmsBase;
 import com.edu.sms.model.entity.SmsError;
-import com.edu.sms.model.mapper.SmsErrorMapper;
-import com.edu.sms.model.mapper.SmsSuccessMapper;
-import com.edu.sms.model.mapper.SmsWaitMapper;
+import com.edu.sms.dao.mapper.SmsErrorMapper;
 import com.edu.utils.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @program: edu_parent
@@ -34,11 +36,17 @@ public class SendSmsService {
     @Autowired
     private SmsWaitMapper smsWaitMapper;
 
-    private static final String regionId = "";
-    private static final String accessKeyId = "";
-    private static final String accessSecret = "";
+    //地区标识（华南一区）
+    private static final String regionId = "cn-shenzhen";
+    //accessKeyId
+    private static final String accessKeyId = "LTAINlLcVcUIsmk2";
+    //accessSecret
+    private static final String accessSecret = "yWVRl4DtNx228fy9pwLpdUJh9xRdbp";
+    //访问地址
     private static final String sendSmsAddress = "dysmsapi.aliyuncs.com";
+    //版本号
     private static final String sendSmsVersion = "2017-05-25";
+    //接口名称
     private static final String sendSmsAction = "SendSms";
 
     /**
@@ -83,10 +91,8 @@ public class SendSmsService {
      */
     public ResultVo sendSms(String asid, String templatecode, String telephone, String signName, String templateParam) {
         ResultVo resultVo = new ResultVo();
-
         DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
-
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
         request.setDomain(sendSmsAddress);
@@ -99,44 +105,49 @@ public class SendSmsService {
         String sid = RandomUtils.GET_RANDOMSTRING(12);
         try {
             CommonResponse response = client.getCommonResponse(request);
-            System.out.println(response.getData());
-            SmsBase smsBase = new SmsBase();
-            SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
-            if (checkSid != null) {
-                sid = RandomUtils.GET_RANDOMSTRING(12);
+            Map map = (Map)JSON.parse(response.getData());
+            //请求成功
+            if("OK".equals(map.get("Code"))){
+                SmsBase smsBase = new SmsBase();
+                SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
+                if (checkSid != null) {
+                    sid = RandomUtils.GET_RANDOMSTRING(12);
+                }
+                smsBase.setSid(sid);
+                smsBase.setAsid(asid);
+                smsBase.setTemplatecode(templatecode);
+                smsBase.setSignname(signName);
+                smsBase.setTelephone(telephone);
+                smsBase.setTemplateparam(templateParam);
+                smsBase.setRemark(map.get("Message").toString());
+                smsBase.setSysStatus("3");
+                smsBase.setCreateTime(new Date());
+                smsBase.setValueFlag("1");
+                smsSuccessMapper.insert(smsBase);
+            }else{
+                SmsError smsError = new SmsError();
+                SmsError checkSid = smsErrorMapper.selectBySid(sid);
+                if (checkSid != null) {
+                    sid = RandomUtils.GET_RANDOMSTRING(12);
+                }
+                smsError.setSid(sid);
+                smsError.setAsid(asid);
+                smsError.setTemplatecode(templatecode);
+                smsError.setTelephone(telephone);
+                smsError.setCode(map.get("Code").toString());
+                smsError.setMessage(map.get("Message").toString());
+                smsError.setTemplateparam(templateParam);
+                smsError.setRemark("请求失败");
+                smsError.setCountFail(1);
+                smsError.setSysStatus("5");
+                smsError.setCreateTime(new Date());
+                smsError.setValueFlag("1");
+                smsErrorMapper.insert(smsError);
             }
-            smsBase.setSid(sid);
-            smsBase.setAsid(asid);
-            smsBase.setTemplatecode(templatecode);
-            smsBase.setSignname(signName);
-            smsBase.setTelephone(telephone);
-            smsBase.setTemplateparam(templateParam);
-            smsBase.setRemark("发送成功");
-            smsBase.setSysStatus("3");
-            smsBase.setCreateTime(new Date());
-            smsBase.setValueFlag("1");
-            smsSuccessMapper.insert(smsBase);
             resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
             resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
+            resultVo.setRt_data(map);
         } catch (Exception e) {
-            SmsError smsError = new SmsError();
-            SmsError checkSid = smsErrorMapper.selectBySid(sid);
-            if (checkSid != null) {
-                sid = RandomUtils.GET_RANDOMSTRING(12);
-            }
-            smsError.setSid(sid);
-            smsError.setAsid(asid);
-            smsError.setTemplatecode(templatecode);
-            smsError.setTelephone(telephone);
-            smsError.setCode("错误码");
-            smsError.setMessage("错误信息");
-            smsError.setTemplateparam(templateParam);
-            //smsError.setRemark("发送失败");
-            smsError.setCountFail(1);
-            smsError.setSysStatus("5");
-            smsError.setCreateTime(new Date());
-            smsError.setValueFlag("1");
-            smsErrorMapper.insert(smsError);
             resultVo.setRt_code(Constant.RESULT_CODE_WONGSYSTEM);
             resultVo.setRt_msg(Constant.RESULT_MSG_WONGSYSTEM);
             e.printStackTrace();
@@ -181,5 +192,50 @@ public class SendSmsService {
             e.printStackTrace();
         }
         return resultVo;
+    }
+
+    public static void main(String[] args) {
+//        DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
+//        IAcsClient client = new DefaultAcsClient(profile);
+//
+//        CommonRequest request = new CommonRequest();
+//        request.setMethod(MethodType.POST);
+//        request.setDomain(sendSmsAddress);
+//        request.setVersion(sendSmsVersion);
+//        request.setAction(sendSmsAction);
+//        request.putQueryParameter("PhoneNumbers", "13750466276");
+//        request.putQueryParameter("SignName", "WeLearning");
+//        request.putQueryParameter("TemplateCode", "SMS_170420060");
+//        request.putQueryParameter("TemplateParam", "{\"code\":\"1234\"}");
+//        String sid = RandomUtils.GET_RANDOMSTRING(12);
+//        try {
+//            CommonResponse response = client.getCommonResponse(request);
+//            String result = response.getData();
+//            System.out.println(result);
+//
+//            CommonRequest queryRequest = new CommonRequest();
+//            queryRequest.setMethod(MethodType.POST);
+//            queryRequest.setDomain("dysmsapi.aliyuncs.com");
+//            queryRequest.setVersion("2017-05-25");
+//            queryRequest.setAction("QuerySendDetails");
+//            queryRequest.putQueryParameter("RegionId", "cn-shenzhen");
+//            queryRequest.putQueryParameter("PhoneNumber", "13750466276");
+//            queryRequest.putQueryParameter("SendDate", "20190723");
+//            queryRequest.putQueryParameter("PageSize", "10");
+//            queryRequest.putQueryParameter("CurrentPage", "1");
+//            queryRequest.putQueryParameter("BizId", "748810063851591923^0");
+//            try {
+//                CommonResponse queryResponse = client.getCommonResponse(queryRequest);
+//                System.out.println(queryResponse.getData());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+        String result = "{\"Message\":\"OK\",\"RequestId\":\"598D34B5-7AF1-4F42-ABFF-84F82B98CADA\",\"BizId\":\"392700763851915113^0\",\"Code\":\"OK\"}";
+        Map map = (Map) JSON.parse(result);
+        System.out.println(map.get("Message").toString());
+
     }
 }

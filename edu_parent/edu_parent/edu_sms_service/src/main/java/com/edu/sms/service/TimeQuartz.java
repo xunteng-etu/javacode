@@ -1,16 +1,17 @@
 package com.edu.sms.service;
 
+import com.alibaba.fastjson.JSON;
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.edu.sms.dao.mapper.SmsSuccessMapper;
+import com.edu.sms.dao.mapper.SmsWaitMapper;
 import com.edu.sms.model.entity.SmsBase;
 import com.edu.sms.model.entity.SmsError;
-import com.edu.sms.model.mapper.SmsErrorMapper;
-import com.edu.sms.model.mapper.SmsSuccessMapper;
-import com.edu.sms.model.mapper.SmsWaitMapper;
+import com.edu.sms.dao.mapper.SmsErrorMapper;
 import com.edu.utils.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: edu_parent
@@ -27,12 +29,12 @@ import java.util.List;
  */
 @Service
 public class TimeQuartz {
-    private static final String regionId = "";
-    private static final String accessKeyId = "";
-    private static final String accessSecret = "";
+    private static final String regionId = "cn-shenzhen";
+    private static final String accessKeyId = "LTAINlLcVcUIsmk2";
+    private static final String accessSecret = "yWVRl4DtNx228fy9pwLpdUJh9xRdbp";
     private static final String sendSmsAddress = "dysmsapi.aliyuncs.com";
     private static final String sendSmsVersion = "2017-05-25";
-    private static final String sendSmsAction = "SendBatchSms";
+    private static final String sendSmsAction = "SendSms";
 
     @Autowired
     private SmsWaitMapper smsWaitMapper;
@@ -58,55 +60,57 @@ public class TimeQuartz {
                 request.setDomain(sendSmsAddress);
                 request.setVersion(sendSmsVersion);
                 request.setAction(sendSmsAction);
-                request.putQueryParameter("PhoneNumberJson", smsBases.get(i).getTelephone());
-                request.putQueryParameter("SignNameJson", smsBases.get(i).getSignname());
+                request.putQueryParameter("PhoneNumbers", smsBases.get(i).getTelephone());
+                request.putQueryParameter("SignName", smsBases.get(i).getSignname());
                 request.putQueryParameter("TemplateCode", smsBases.get(i).getTemplatecode());
-                request.putQueryParameter("TemplateParamJson", smsBases.get(i).getTemplateparam());
+                request.putQueryParameter("TemplateParam", smsBases.get(i).getTemplateparam());
                 String sid = RandomUtils.GET_RANDOMSTRING(12);
                 try {
                     CommonResponse response = client.getCommonResponse(request);
-                    System.out.println(response.getData());
-                    //成功...
-                    SmsBase smsBase = new SmsBase();
-                    SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
-                    if (checkSid != null) {
-                        sid = RandomUtils.GET_RANDOMSTRING(12);
+                    Map map = (Map) JSON.parse(response.getData());
+                    if ("OK".equals(map.get("Code"))) {
+                        //成功...
+                        SmsBase smsBase = new SmsBase();
+                        SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
+                        if (checkSid != null) {
+                            sid = RandomUtils.GET_RANDOMSTRING(12);
+                        }
+                        smsBase.setSid(sid);
+                        smsBase.setAsid(smsBases.get(i).getAsid());
+                        smsBase.setTemplatecode(smsBases.get(i).getTemplatecode());
+                        smsBase.setSignname(smsBases.get(i).getSignname());
+                        smsBase.setTelephone(smsBases.get(i).getTelephone());
+                        smsBase.setTemplateparam(smsBases.get(i).getTemplateparam());
+                        smsBase.setRemark(map.get("Message").toString());
+                        smsBase.setSysStatus("3");
+                        smsBase.setCreateTime(new Date());
+                        smsBase.setValueFlag("1");
+                        //把数据移到成功表
+                        smsSuccessMapper.insert(smsBase);
+                    } else {
+                        //失败...
+                        SmsError smsError = new SmsError();
+                        SmsError checkSid = smsErrorMapper.selectBySid(sid);
+                        if (checkSid != null) {
+                            sid = RandomUtils.GET_RANDOMSTRING(12);
+                        }
+                        smsError.setSid(sid);
+                        smsError.setAsid(smsBases.get(i).getAsid());
+                        smsError.setTemplatecode(smsBases.get(i).getTemplatecode());
+                        smsError.setTelephone(smsBases.get(i).getTelephone());
+                        smsError.setCode(map.get("Code").toString());
+                        smsError.setMessage(map.get("Message").toString());
+                        smsError.setTemplateparam(smsBases.get(i).getTemplateparam());
+                        smsError.setSignname(smsBases.get(i).getSignname());
+                        smsError.setRemark("请求失败");
+                        smsError.setCountFail(1);
+                        smsError.setSysStatus("5");
+                        smsError.setCreateTime(new Date());
+                        smsError.setValueFlag("1");
+                        //把数据移到失败表
+                        smsErrorMapper.insert(smsError);
                     }
-                    smsBase.setSid(sid);
-                    smsBase.setAsid(smsBases.get(i).getAsid());
-                    smsBase.setTemplatecode(smsBases.get(i).getTemplatecode());
-                    smsBase.setSignname(smsBases.get(i).getSignname());
-                    smsBase.setTelephone(smsBases.get(i).getTelephone());
-                    smsBase.setTemplateparam(smsBases.get(i).getTemplateparam());
-                    smsBase.setRemark("发送成功");
-                    smsBase.setSysStatus("3");
-                    smsBase.setCreateTime(new Date());
-                    smsBase.setValueFlag("1");
-                    //把数据移到成功表
-                    smsSuccessMapper.insert(smsBase);
-                    //smsWaitMapper.delete(smsBases.get(i).getSid());
                 } catch (Exception e) {
-                    //失败...
-                    SmsError smsError = new SmsError();
-                    SmsError checkSid = smsErrorMapper.selectBySid(sid);
-                    if (checkSid != null) {
-                        sid = RandomUtils.GET_RANDOMSTRING(12);
-                    }
-                    smsError.setSid(sid);
-                    smsError.setAsid(smsBases.get(i).getAsid());
-                    smsError.setTemplatecode(smsBases.get(i).getTemplatecode());
-                    smsError.setTelephone(smsBases.get(i).getTelephone());
-                    smsError.setCode("错误码");
-                    smsError.setMessage("错误信息");
-                    smsError.setTemplateparam(smsBases.get(i).getTemplateparam());
-                    //smsError.setRemark("发送失败");
-                    smsError.setCountFail(1);
-                    smsError.setSysStatus("5");
-                    smsError.setCreateTime(new Date());
-                    smsError.setValueFlag("1");
-                    //把数据移到失败表
-                    smsErrorMapper.insert(smsError);
-                    //smsWaitMapper.delete(smsBases.get(i).getSid());
                     e.printStackTrace();
                 }
                 smsWaitMapper.delete(smsBases.get(i).getSid());
@@ -131,40 +135,48 @@ public class TimeQuartz {
                 request.setDomain(sendSmsAddress);
                 request.setVersion(sendSmsVersion);
                 request.setAction(sendSmsAction);
-                request.putQueryParameter("PhoneNumberJson", smsErrors.get(i).getTelephone());
-                request.putQueryParameter("SignNameJson", smsErrors.get(i).getSignname());
+                request.putQueryParameter("PhoneNumbers", smsErrors.get(i).getTelephone());
+                request.putQueryParameter("SignName", smsErrors.get(i).getSignname());
                 request.putQueryParameter("TemplateCode", smsErrors.get(i).getTemplatecode());
-                request.putQueryParameter("TemplateParamJson", smsErrors.get(i).getTemplateparam());
+                request.putQueryParameter("TemplateParam", smsErrors.get(i).getTemplateparam());
                 String sid = RandomUtils.GET_RANDOMSTRING(12);
                 try {
                     CommonResponse response = client.getCommonResponse(request);
-                    System.out.println(response.getData());
-                    //成功...
-                    SmsBase smsBase = new SmsBase();
-                    SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
-                    if (checkSid != null) {
-                        sid = RandomUtils.GET_RANDOMSTRING(12);
+                    Map map = (Map) JSON.parse(response.getData());
+                    if ("OK".equals(map.get("Code"))) {
+                        //成功...
+                        SmsBase smsBase = new SmsBase();
+                        SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
+                        if (checkSid != null) {
+                            sid = RandomUtils.GET_RANDOMSTRING(12);
+                        }
+                        smsBase.setSid(sid);
+                        smsBase.setAsid(smsErrors.get(i).getAsid());
+                        smsBase.setTemplatecode(smsErrors.get(i).getTemplatecode());
+                        smsBase.setSignname(smsErrors.get(i).getSignname());
+                        smsBase.setTelephone(smsErrors.get(i).getTelephone());
+                        smsBase.setTemplateparam(smsErrors.get(i).getTemplateparam());
+                        smsBase.setRemark("发送成功");
+                        smsBase.setSysStatus("3");
+                        smsBase.setCreateTime(new Date());
+                        smsBase.setValueFlag("1");
+                        //把数据移到成功表
+                        smsSuccessMapper.insert(smsBase);
+                        smsErrorMapper.delete(smsErrors.get(i).getSid());
+                    } else {
+                        //失败,次数累计
+                        smsErrorMapper.updateCountFail(smsErrors.get(i).getCountFail() + 1, smsErrors.get(i).getSid());
                     }
-                    smsBase.setSid(sid);
-                    smsBase.setAsid(smsErrors.get(i).getAsid());
-                    smsBase.setTemplatecode(smsErrors.get(i).getTemplatecode());
-                    smsBase.setSignname(smsErrors.get(i).getSignname());
-                    smsBase.setTelephone(smsErrors.get(i).getTelephone());
-                    smsBase.setTemplateparam(smsErrors.get(i).getTemplateparam());
-                    smsBase.setRemark("发送成功");
-                    smsBase.setSysStatus("3");
-                    smsBase.setCreateTime(new Date());
-                    smsBase.setValueFlag("1");
-                    //把数据移到成功表
-                    smsSuccessMapper.insert(smsBase);
-                    //smsErrorMapper.delete(smsErrors.get(i).getSid());
                 } catch (Exception e) {
-                    //失败,次数累计
-                    smsErrorMapper.updateCountFail(smsErrors.get(i).getCountFail() + 1, smsErrors.get(i).getSid());
                     e.printStackTrace();
                 }
-                smsErrorMapper.delete(smsErrors.get(i).getSid());
+
             }
         }
+    }
+
+    @Scheduled(cron = "0 0/1 9-21 * * ?")//早上九点到晚上九点，每1分钟执行一次
+    public void print() {
+        System.out.println("打印："+new Date());
     }
 }
