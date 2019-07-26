@@ -9,14 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>edu_sms_client</artifactId>
+    <artifactId>edu_account_model</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.edu</groupId>
-            <artifactId>edu_sms_model</artifactId>
+            <artifactId>edu_base</artifactId>
         </dependency>
 
     </dependencies>
-
 </project>

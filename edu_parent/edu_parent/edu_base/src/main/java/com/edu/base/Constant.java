@@ -42,6 +42,11 @@ public class Constant {
      */
     public static final String RESULT_CODE_WONGTOKEN = "40009";
 
+    /**
+     * 手机号码已存在
+     */
+    public static final String RESULT_CODE_MOBILEISEXISTS = "50001";
+
 
     public static final String RESULT_MSG_WONGSYSTEM = "操作失败";
     public static final String RESULT_MSG_SUCCES = "请求成功/操作成功";
@@ -51,4 +56,6 @@ public class Constant {
     public static final String RESULT_MSG_WONGIPADDRESS = "IP地址没有权限";
     public static final String RESULT_MSG_WONGTOKEN = "Token已过期";
     public static final String RESULT_MSG_WONGCOUNT = "请求超过次数";
+
+    public static final String RESULT_MSG_MOBILEISEXISTS="手机号码已存在";
 }

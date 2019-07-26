@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author: BaronLi
  * @create: 2019-07-23 16:26
  */
-@Service
+@Service(timeout = 5000,retries = -1)
 public class SendSmsServiceImpl implements SendSmsService {
 
     @Autowired
