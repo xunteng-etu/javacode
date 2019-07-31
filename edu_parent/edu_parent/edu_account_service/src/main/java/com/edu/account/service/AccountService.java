@@ -12,6 +12,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -116,9 +117,59 @@ public class AccountService {
         //短信模板
         String templateParam = "{\"code\":\"" + code + "\"}";
         //保存进redis,有效期为5分钟
-        redisUtils.setObj(mobile + "_ResCode", code, 5, TimeUnit.MINUTES);
+        redisUtils.setObj(mobile + Constant.REDIS_KEY_REGISTER_CODE, code, 5, TimeUnit.MINUTES);
         try {
             resultVo = sendSmsService.sendSms(asid, templatecode, mobile, signName, templateParam);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultVo;
+    }
+
+    /**
+     * 用户注册
+     *
+     * @param mobile 注册手机
+     * @param code   验证码
+     * @param roler  角色（1.教师 2.学生 3.家长）
+     * @return
+     */
+    public ResultVo register(String mobile, String code, String roler) {
+        ResultVo resultVo = new ResultVo();
+        if ("".equals(mobile) || "".equals(code) || "".equals(roler)) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
+            return resultVo;
+        }
+        ResultVo result = checkRegistered(mobile);
+        if (result.getRt_data() != null) {
+            resultVo.setRt_code(Constant.RESULT_CODE_MOBILEISEXISTS);
+            resultVo.setRt_msg(Constant.RESULT_MSG_MOBILEISEXISTS);
+            resultVo.setRt_data(mobile);
+            return resultVo;
+        }
+        if (!code.equals(redisUtils.getObj(mobile + Constant.REDIS_KEY_REGISTER_CODE))) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGCODE);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGCODE);
+            resultVo.setRt_data(code);
+            return resultVo;
+        }
+        try {
+            Account account = new Account();
+            String id = RandomUtils.GET_RANDOMSTRING(12);
+            Account check = accountMapper.selectByAid(id);
+            if (check != null) {
+                id = RandomUtils.GET_RANDOMSTRING(12);
+            }
+            account.setId(id);
+            account.setMobile(mobile);
+            account.setCreateTime(new Date());
+            account.setSerial(0);
+            account.setSysStatus("1");
+            account.setValueFlag("1");
+            accountMapper.insert(account);
+            resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
+            resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
         } catch (Exception e) {
             e.printStackTrace();
         }

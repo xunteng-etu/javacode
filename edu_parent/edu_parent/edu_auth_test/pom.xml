@@ -25,6 +25,10 @@
             <groupId>com.edu</groupId>
             <artifactId>edu_account_client</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.edu</groupId>
+            <artifactId>edu_login_client</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.edu</groupId>

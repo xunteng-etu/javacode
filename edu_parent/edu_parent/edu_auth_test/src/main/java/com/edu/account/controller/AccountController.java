@@ -22,18 +22,51 @@ public class AccountController {
     @Reference
     AccountService accountService;
 
-    @RequestMapping(value = "checkMobile",method = RequestMethod.POST)
-    public ResultVo checkMobile(@RequestParam(value = "mobile")String mobile){
+    /**
+     * 查询手机号是否已注册
+     * @param mobile
+     * @return
+     */
+    @RequestMapping(value = "checkMobile", method = RequestMethod.POST)
+    public ResultVo checkMobile(@RequestParam(value = "mobile", defaultValue = "") String mobile) {
         return accountService.checkRegistered(mobile);
     }
 
-    @RequestMapping(value = "check",method = RequestMethod.POST)
-    public ResultVo check(@RequestParam(value = "mobile")String mobile,
-                          @RequestParam(value = "asid")String asid,
-                          @RequestParam(value = "templatecode")String templatecode,
-                          @RequestParam(value = "signName")String signName){
+    /**
+     * 手机注册验证码
+     * @param mobile
+     * @param asid
+     * @param templatecode
+     * @param signName
+     * @return
+     */
+    @RequestMapping(value = "check", method = RequestMethod.POST)
+    public ResultVo check(@RequestParam(value = "mobile", defaultValue = "") String mobile,
+                          @RequestParam(value = "asid", defaultValue = "") String asid,
+                          @RequestParam(value = "templatecode", defaultValue = "") String templatecode,
+                          @RequestParam(value = "signName", defaultValue = "") String signName) {
         return accountService.sendRegister(mobile, asid, templatecode, signName);
     }
 
+    /**
+     * 用户注册
+     * @param mobile
+     * @param code
+     * @param roler
+     * @return
+     */
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    public ResultVo register(@RequestParam(value = "mobile",defaultValue = "")String mobile,
+                             @RequestParam(value = "code",defaultValue = "")String code,
+                             @RequestParam(value = "roler",defaultValue = "")String roler) {
+        return accountService.register(mobile,code,roler);
+
+    }
+
+    @RequestMapping(value = "createPwd",method = RequestMethod.POST)
+    public ResultVo createPwd(@RequestParam(value = "id",defaultValue = "")String id,
+                              @RequestParam(value = "pwd",defaultValue = "")String pwd){
+        return accountService.createPwd(id,pwd);
+    }
 
 }

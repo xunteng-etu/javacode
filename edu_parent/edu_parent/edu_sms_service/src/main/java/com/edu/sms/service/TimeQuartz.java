@@ -7,6 +7,7 @@ import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.IAcsClient;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import com.edu.base.Constant;
 import com.edu.sms.dao.mapper.SmsSuccessMapper;
 import com.edu.sms.dao.mapper.SmsWaitMapper;
 import com.edu.sms.model.entity.SmsBase;
@@ -29,12 +30,6 @@ import java.util.Map;
  */
 @Service
 public class TimeQuartz {
-    private static final String regionId = "cn-shenzhen";
-    private static final String accessKeyId = "LTAINlLcVcUIsmk2";
-    private static final String accessSecret = "yWVRl4DtNx228fy9pwLpdUJh9xRdbp";
-    private static final String sendSmsAddress = "dysmsapi.aliyuncs.com";
-    private static final String sendSmsVersion = "2017-05-25";
-    private static final String sendSmsAction = "SendSms";
 
     @Autowired
     private SmsWaitMapper smsWaitMapper;
@@ -52,14 +47,14 @@ public class TimeQuartz {
                 //修改短信状态
                 smsWaitMapper.updateSysStatus(smsBases.get(i).getSid(), "1");
                 //发送...
-                DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
+                DefaultProfile profile = DefaultProfile.getProfile(Constant.regionId, Constant.accessKeyId, Constant.accessSecret);
                 IAcsClient client = new DefaultAcsClient(profile);
 
                 CommonRequest request = new CommonRequest();
                 request.setMethod(MethodType.POST);
-                request.setDomain(sendSmsAddress);
-                request.setVersion(sendSmsVersion);
-                request.setAction(sendSmsAction);
+                request.setDomain(Constant.sendSmsAddress);
+                request.setVersion(Constant.sendSmsVersion);
+                request.setAction(Constant.sendSmsAction);
                 request.putQueryParameter("PhoneNumbers", smsBases.get(i).getTelephone());
                 request.putQueryParameter("SignName", smsBases.get(i).getSignname());
                 request.putQueryParameter("TemplateCode", smsBases.get(i).getTemplatecode());
@@ -127,14 +122,14 @@ public class TimeQuartz {
                 //修改发送状态
                 smsErrorMapper.updateSysStatus(smsErrors.get(i).getSid(), "1");
                 //发送...
-                DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
+                DefaultProfile profile = DefaultProfile.getProfile(Constant.regionId, Constant.accessKeyId, Constant.accessSecret);
                 IAcsClient client = new DefaultAcsClient(profile);
 
                 CommonRequest request = new CommonRequest();
                 request.setMethod(MethodType.POST);
-                request.setDomain(sendSmsAddress);
-                request.setVersion(sendSmsVersion);
-                request.setAction(sendSmsAction);
+                request.setDomain(Constant.sendSmsAddress);
+                request.setVersion(Constant.sendSmsVersion);
+                request.setAction(Constant.sendSmsAction);
                 request.putQueryParameter("PhoneNumbers", smsErrors.get(i).getTelephone());
                 request.putQueryParameter("SignName", smsErrors.get(i).getSignname());
                 request.putQueryParameter("TemplateCode", smsErrors.get(i).getTemplatecode());

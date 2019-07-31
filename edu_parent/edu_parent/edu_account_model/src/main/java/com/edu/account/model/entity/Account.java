@@ -2,13 +2,15 @@ package com.edu.account.model.entity;
 
 import com.edu.base.entity.BaseEntity;
 
+import java.io.Serializable;
+
 /**
  * @program: edu_parent
  * @description: 账户表实体类
  * @author: BaronLi
  * @create: 2019-07-25 09:44
  */
-public class Account extends BaseEntity {
+public class Account extends BaseEntity implements Serializable {
     private String id;
     private String mobile;
     private String pw;

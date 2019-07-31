@@ -28,4 +28,8 @@ public class AccountServiceImpl implements AccountService {
     public ResultVo sendRegister(String mobile, String asid, String templatecode, String signName) {
         return accountService.sendRegister(mobile, asid, templatecode, signName);
     }
+
+    public ResultVo register(String mobile, String code, String roler) {
+        return accountService.register(mobile, code, roler);
+    }
 }

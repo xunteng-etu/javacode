@@ -33,6 +33,8 @@
         <!--        test-->
         <module>edu_auth_test</module>
         <module>edu_account_client</module>
+        <module>edu_login_dubbo</module>
+        <module>edu_login_client</module>
 
     </modules>
     <properties>
@@ -119,7 +121,17 @@
             </dependency>
             <dependency>
                 <groupId>com.edu</groupId>
+                <artifactId>edu_login_dubbo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.edu</groupId>
                 <artifactId>edu_account_client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.edu</groupId>
+                <artifactId>edu_login_client</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

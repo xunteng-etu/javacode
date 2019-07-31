@@ -19,9 +19,11 @@
     <sql id="Base_Column_List">
         A_ID,A_MOBILE,A_PW,WX_OPENID,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
     </sql>
-    
+
     <select id="checkRegistered" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/> from t_account where A_MOBILE = #{mobile}
+        select
+        <include refid="Base_Column_List"/>
+        from t_account where A_MOBILE = #{mobile}
     </select>
 
     <select id="selectPwByID" parameterType="java.lang.String" resultType="java.lang.String">
@@ -31,4 +33,21 @@
     <update id="updatePwByID" parameterType="java.lang.String">
         update t_account set A_PW = #{pw} where A_ID = #{id}
     </update>
+
+    <select id="selectByAid" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account where A_ID = #{id}
+    </select>
+
+    <insert id="insert" parameterType="Account">
+        insert into t_account(A_ID,A_MOBILE,A_PW,WX_OPENID,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
+        values (#{id},#{mobile},#{pw},#{wxOpenid},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+    </insert>
+
+    <select id="getByMobileAndPwd" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account where A_MOBILE = #{mobile} and A_PW = #{pw}
+    </select>
 </mapper>

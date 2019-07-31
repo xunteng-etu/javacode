@@ -31,4 +31,14 @@ public interface AccountService {
      * @return
      */
     ResultVo sendRegister(String mobile, String asid, String templatecode, String signName);
+
+    /**
+     * 用户注册
+     *
+     * @param mobile 注册手机
+     * @param code   验证码
+     * @param roler  角色（1.教师 2.学生 3.家长）
+     * @return
+     */
+    ResultVo register(String mobile, String code, String roler);
 }

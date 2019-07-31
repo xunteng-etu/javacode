@@ -36,18 +36,7 @@ public class SendSmsService {
     @Autowired
     private SmsWaitMapper smsWaitMapper;
 
-    //地区标识（华南一区）
-    private static final String regionId = "cn-shenzhen";
-    //accessKeyId
-    private static final String accessKeyId = "LTAINlLcVcUIsmk2";
-    //accessSecret
-    private static final String accessSecret = "yWVRl4DtNx228fy9pwLpdUJh9xRdbp";
-    //访问地址
-    private static final String sendSmsAddress = "dysmsapi.aliyuncs.com";
-    //版本号
-    private static final String sendSmsVersion = "2017-05-25";
-    //接口名称
-    private static final String sendSmsAction = "SendSms";
+
 
     /**
      * 发送短信
@@ -91,13 +80,13 @@ public class SendSmsService {
      */
     public ResultVo sendSms(String asid, String templatecode, String telephone, String signName, String templateParam) {
         ResultVo resultVo = new ResultVo();
-        DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
+        DefaultProfile profile = DefaultProfile.getProfile(Constant.regionId, Constant.accessKeyId, Constant.accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
-        request.setDomain(sendSmsAddress);
-        request.setVersion(sendSmsVersion);
-        request.setAction(sendSmsAction);
+        request.setDomain(Constant.sendSmsAddress);
+        request.setVersion(Constant.sendSmsVersion);
+        request.setAction(Constant.sendSmsAction);
         request.putQueryParameter("PhoneNumbers", telephone);
         request.putQueryParameter("SignName", signName);
         request.putQueryParameter("TemplateCode", templatecode);
