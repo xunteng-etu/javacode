@@ -1,5 +1,7 @@
 package com.edu.sms.model.entity;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
 /**
@@ -8,33 +10,10 @@ import java.io.Serializable;
  * @author: BaronLi
  * @create: 2019-07-05 11:19
  */
+@Data
 public class SmsError extends SmsBase implements Serializable {
-
     private Integer countFail;
     private String code;
     private String message;
 
-    public Integer getCountFail() {
-        return countFail;
-    }
-
-    public void setCountFail(Integer countFail) {
-        this.countFail = countFail;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }
