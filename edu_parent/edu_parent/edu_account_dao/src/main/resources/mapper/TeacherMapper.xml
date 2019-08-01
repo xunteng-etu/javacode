@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.account.dao.mapper.TeacherMapper">
+
+    <resultMap id="BaseResultMap" type="com.edu.account.model.entity.Teacher">
+        <id column="A_ID" property="aID"/>
+        <result column="A_NAME" property="name"/>
+        <result column="A_SEX" property="sex"/>
+        <result column="BARFDATE" property="barfdate"/>
+        <result column="A_AGE" property="age"/>
+        <result column="TEACH_NUM" property="teachNum"/>
+        <result column="SERIAL" property="serial"/>
+        <result column="REMARK" property="remark"/>
+        <result column="SYS_STATUS" property="sysStatus"/>
+        <result column="CREATE_TIME" property="createTime"/>
+        <result column="UPDATE_TIME" property="updateTime"/>
+        <result column="VALUE_FLAG" property="valueFlag"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+       A_ID,A_NAME,A_SEX,BARFDATE,A_AGE,TEACH_NUM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
+    </sql>
+
+    <insert id="insert" parameterType="Teacher">
+        insert into t_account_teacher (A_ID,A_NAME,A_SEX,BARFDATE,A_AGE,TEACH_NUM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
+        values (#{aID},#{name},#{sex},#{barfdate},#{age},#{teachNum},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+    </insert>
+</mapper>

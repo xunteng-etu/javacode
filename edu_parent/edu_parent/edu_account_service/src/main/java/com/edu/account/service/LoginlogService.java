@@ -127,7 +127,7 @@ public class LoginlogService {
             loginlog.setClientName(clientName);
 
             //账户标识
-            loginlog.setaID(account.getId());
+            loginlog.setAID(account.getId());
             loginlog.setLoginType("1");//1.验证码 3.密码
             loginlog.setLoginTime(new Date());
             loginlog.setSerial(0);
@@ -185,7 +185,7 @@ public class LoginlogService {
             loginlog.setAsID(asid);
             loginlog.setClientName(clientName);
             //账户标识
-            loginlog.setaID(account.getId());
+            loginlog.setAID(account.getId());
             loginlog.setLoginType("3");//1.验证码 3.密码
             loginlog.setLoginTime(new Date());
             loginlog.setSerial(0);

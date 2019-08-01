@@ -2,7 +2,13 @@ package com.edu.account.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.edu.account.dao.mapper.AccountMapper;
+import com.edu.account.dao.mapper.ParentMapper;
+import com.edu.account.dao.mapper.StudentMapper;
+import com.edu.account.dao.mapper.TeacherMapper;
 import com.edu.account.model.entity.Account;
+import com.edu.account.model.entity.Parent;
+import com.edu.account.model.entity.Student;
+import com.edu.account.model.entity.Teacher;
 import com.edu.base.Constant;
 import com.edu.base.ResultVo;
 import com.edu.sms.dubbo.service.SendSmsService;
@@ -29,6 +35,12 @@ public class AccountService {
     private AccountMapper accountMapper;
     @Reference
     private SendSmsService sendSmsService;
+    @Autowired
+    private TeacherMapper teacherMapper;
+    @Autowired
+    private ParentMapper parentMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
     /**
      * 查询手机号是否已注册
@@ -168,6 +180,39 @@ public class AccountService {
             account.setSysStatus("1");
             account.setValueFlag("1");
             accountMapper.insert(account);
+            if (roler.equals("1")) {
+                //教师
+                Teacher teacher = new Teacher();
+                teacher.setAID(id);
+                teacher.setCreateTime(new Date());
+                teacher.setSerial(0);
+                teacher.setSysStatus("1");
+                teacher.setValueFlag("1");
+                teacherMapper.insert(teacher);
+            } else if (roler.equals("2")) {
+                //家长
+                Parent parent = new Parent();
+                parent.setAID(id);
+                parent.setCreateTime(new Date());
+                parent.setSerial(0);
+                parent.setSysStatus("1");
+                parent.setValueFlag("1");
+                parentMapper.insert(parent);
+            } else if (roler.equals("3")) {
+                //学生
+                Student student = new Student();
+                student.setAID(id);
+                student.setCreateTime(new Date());
+                student.setSerial(0);
+                student.setSysStatus("1");
+                student.setValueFlag("1");
+                studentMapper.insert(student);
+            } else {
+                resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+                resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
+                return resultVo;
+            }
+
             resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
             resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
         } catch (Exception e) {
