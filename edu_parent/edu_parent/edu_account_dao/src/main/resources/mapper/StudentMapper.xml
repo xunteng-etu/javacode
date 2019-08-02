@@ -25,4 +25,9 @@
         insert into t_account_stu(A_ID,A_NAME,A_SEX,BARFDATE,A_AGE,A_STU_NUM,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
         values (#{aID},#{name},#{sex},#{barfdate},#{age},#{stuNum},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
     </insert>
+
+    <select id="selectByStuNum" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from t_account_stu
+        where A_STU_NUM = #{stuNum}
+    </select>
 </mapper>

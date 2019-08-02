@@ -144,5 +144,6 @@ public class TokenUtils {
 
        // List<ProductInfo> productInfos =  productInfoList.stream().filter(productInfo -> productInfo.getIsSalePack()==IS_SALETACK).collect(Collectors.toList());
        // Map<String,List<ProductInfo>> productInfos =  productInfoList.stream().filter(productInfo -> productInfo.getIsSalePack()==IS_SALETACK).collect(Collectors.groupingBy(ProductInfo::getPackCode));
+
     }
 }

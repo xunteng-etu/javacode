@@ -7,5 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface ParentMapper {
+    /**
+     * 新增一条数据
+     * @param parent
+     */
     void insert(Parent parent);
 }

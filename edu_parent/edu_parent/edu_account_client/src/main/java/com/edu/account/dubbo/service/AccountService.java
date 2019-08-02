@@ -41,4 +41,17 @@ public interface AccountService {
      * @return
      */
     ResultVo register(String mobile, String code, String roler);
+
+    /**
+     * 家长注册学生服务
+     *
+     * @param stuNum 学籍号
+     * @param name   学生姓名
+     * @param sex    性别
+     * @param date   出生日期
+     * @param rel    家长与该学生关系：（1：母，2：父，3：祖母，4：祖父，5：外婆：6：外公，9：其他亲戚）
+     * @param token  家长登录返回token，用于判断登录信息是否失效
+     * @return
+     */
+    ResultVo parentRegister(String stuNum, String name, String sex, String date, String rel, String token);
 }

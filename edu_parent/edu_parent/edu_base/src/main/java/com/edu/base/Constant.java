@@ -109,6 +109,15 @@ public class Constant {
      * 验证码错误
      */
     public static final String RESULT_CODE_WONGCODE = "50002";
+    /**
+     * 学生已注册
+     */
+    public static final String RESULT_CODE_STUISREGISTER = "60001";
+
+    /**
+     * 学生与该家长已绑定
+     */
+    public static final String RESULT_CODE_WONGSTUBING = "60002";
 
 
     //接口返回消息
@@ -123,4 +132,6 @@ public class Constant {
     public static final String RESULT_MSG_MOBILEISEXISTS = "手机号码已存在";
     public static final String RESULT_MSG_MOBILEISNOEXISTS = "手机号码不存在";
     public static final String RESULT_MSG_WONGCODE = "验证码错误";
+    public static final String RESULT_MSG_STUISREGISTER = "学生已注册";
+    public static final String RESULT_MSG_WONGSTUBING = "学生与该家长已绑定";
 }

@@ -63,10 +63,25 @@ public class AccountController {
 
     }
 
+    /**
+     * 创建密码服务
+     * @param id
+     * @param pwd
+     * @return
+     */
     @RequestMapping(value = "createPwd",method = RequestMethod.POST)
     public ResultVo createPwd(@RequestParam(value = "id",defaultValue = "")String id,
                               @RequestParam(value = "pwd",defaultValue = "")String pwd){
         return accountService.createPwd(id,pwd);
+    }
+    @RequestMapping(value = "parentRegister",method = RequestMethod.POST)
+    public ResultVo parentRegister(@RequestParam(value = "stuNum",defaultValue = "")String stuNum,
+                                   @RequestParam(value = "name",defaultValue = "")String name,
+                                   @RequestParam(value = "sex",defaultValue = "")String sex,
+                                   @RequestParam(value = "date",defaultValue = "")String date,
+                                   @RequestParam(value = "rel",defaultValue = "")String rel,
+                                   @RequestParam(value = "token",defaultValue = "")String token){
+        return accountService.parentRegister(stuNum, name, sex, date, rel, token);
     }
 
 }

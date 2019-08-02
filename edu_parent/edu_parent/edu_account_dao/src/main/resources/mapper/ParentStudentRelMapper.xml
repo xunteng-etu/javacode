@@ -18,4 +18,23 @@
     <sql id="Base_Column_List">
        REL_ID,PARENT_ID,STUDENT_ID,A_REF,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG
     </sql>
+
+    <insert id="insert" parameterType="ParentStudentRel">
+        insert into t_account_rel(REL_ID,PARENT_ID,STUDENT_ID,A_REF,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
+        values (#{relID},#{parentID},#{studentID},#{ref},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+    </insert>
+
+    <select id="selectByID" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_rel
+        where REL_ID = #{relID}
+    </select>
+
+    <select id="selectByParentIDAndStuID" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_rel
+        where PARENT_ID = #{parentID} and STUDENT_ID = #{studentID}
+    </select>
 </mapper>

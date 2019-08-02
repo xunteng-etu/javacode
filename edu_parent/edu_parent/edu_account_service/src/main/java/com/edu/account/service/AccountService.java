@@ -1,20 +1,15 @@
 package com.edu.account.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
-import com.edu.account.dao.mapper.AccountMapper;
-import com.edu.account.dao.mapper.ParentMapper;
-import com.edu.account.dao.mapper.StudentMapper;
-import com.edu.account.dao.mapper.TeacherMapper;
-import com.edu.account.model.entity.Account;
-import com.edu.account.model.entity.Parent;
-import com.edu.account.model.entity.Student;
-import com.edu.account.model.entity.Teacher;
+import com.edu.account.dao.mapper.*;
+import com.edu.account.model.entity.*;
 import com.edu.base.Constant;
 import com.edu.base.ResultVo;
 import com.edu.sms.dubbo.service.SendSmsService;
 import com.edu.utils.RandomUtils;
 import com.edu.utils.RedisUtils;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +36,8 @@ public class AccountService {
     private ParentMapper parentMapper;
     @Autowired
     private StudentMapper studentMapper;
+    @Autowired
+    private ParentStudentRelMapper parentStudentRelMapper;
 
     /**
      * 查询手机号是否已注册
@@ -143,7 +140,7 @@ public class AccountService {
      *
      * @param mobile 注册手机
      * @param code   验证码
-     * @param roler  角色（1.教师 2.学生 3.家长）
+     * @param roler  角色（1.教师 2.家长 3.学生）
      * @return
      */
     public ResultVo register(String mobile, String code, String roler) {
@@ -217,6 +214,99 @@ public class AccountService {
             resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return resultVo;
+    }
+
+    /**
+     * 家长注册学生服务
+     *
+     * @param stuNum 学籍号
+     * @param name   学生姓名
+     * @param sex    性别
+     * @param date   出生日期
+     * @param rel    家长与该学生关系：（1：母，2：父，3：祖母，4：祖父，5：外婆：6：外公，9：其他亲戚）
+     * @param token  家长登录返回token，用于判断登录信息是否失效
+     * @return
+     */
+    public ResultVo parentRegister(String stuNum, String name, String sex, String date, String rel, String token) {
+        //关系数组
+        String[] rels = {"1", "2", "3", "4", "5", "6", "9"};
+        ResultVo resultVo = new ResultVo();
+        if ("".equals(stuNum) || "".equals(name) || "".equals(sex) || "".equals(date) || "".equals(rel) || "".equals(token)) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
+            return resultVo;
+        }
+        //校验关系参数是否有效
+        if (!ArrayUtils.contains(rels, rel)) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
+            return resultVo;
+        }
+        //判断家长登录信息是否有效
+        Account parent = (Account) redisUtils.getObj(token + Constant.REDIS_KEY_LOGIN);
+        if (parent == null) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGTOKEN);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGTOKEN);
+            return resultVo;
+        }
+        //判断该学籍号是否已被注册
+        Student student = studentMapper.selectByStuNum(stuNum);
+        //提取家长与学生关系实体
+        String relID = RandomUtils.GET_RANDOMSTRING(12);
+        ParentStudentRel parentStudentRel = new ParentStudentRel();
+        parentStudentRel.setRelID(relID);
+        parentStudentRel.setParentID(parent.getId());
+        parentStudentRel.setRef(rel);
+        parentStudentRel.setSerial(0);
+        parentStudentRel.setSysStatus("1");
+        parentStudentRel.setCreateTime(new Date());
+        parentStudentRel.setValueFlag("1");
+        //绑定到家长与学生关系表
+        if (student != null) {
+            ParentStudentRel ps = parentStudentRelMapper.selectByParentIDAndStuID(parent.getId(),student.getAID());
+            //已经绑定过
+            if(ps != null){
+                resultVo.setRt_code(Constant.RESULT_CODE_WONGSTUBING);
+                resultVo.setRt_msg(Constant.RESULT_MSG_WONGSTUBING);
+                resultVo.setRt_data(student);
+                return resultVo;
+            }
+            parentStudentRel.setStudentID(student.getAID());
+            parentStudentRelMapper.insert(parentStudentRel);
+            resultVo.setRt_code(Constant.RESULT_CODE_STUISREGISTER);
+            resultVo.setRt_msg(Constant.RESULT_MSG_STUISREGISTER);
+            resultVo.setRt_data(student);
+        } else {
+            //新增账户信息
+            Account account = new Account();
+            String aid = RandomUtils.GET_RANDOMSTRING(12);
+            account.setId(aid);
+            account.setCreateTime(new Date());
+            account.setSerial(0);
+            account.setSysStatus("1");
+            account.setValueFlag("1");
+            accountMapper.insert(account);
+            //新增学生信息
+            Student stu = new Student();
+            stu.setAID(aid);
+            stu.setName(name);
+            stu.setSex(sex);
+            stu.setBarfdate(date);
+            stu.setStuNum(stuNum);
+            stu.setSerial(0);
+            stu.setSysStatus("1");
+            stu.setValueFlag("1");
+            stu.setCreateTime(new Date());
+            studentMapper.insert(stu);
+            //绑定家长与学生关系
+            parentStudentRel.setStudentID(stu.getAID());
+            parentStudentRelMapper.insert(parentStudentRel);
+
+            resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
+            resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
+            resultVo.setRt_data(stu);
         }
         return resultVo;
     }

@@ -32,4 +32,8 @@ public class AccountServiceImpl implements AccountService {
     public ResultVo register(String mobile, String code, String roler) {
         return accountService.register(mobile, code, roler);
     }
+
+    public ResultVo parentRegister(String stuNum, String name, String sex, String date, String rel, String token) {
+        return accountService.parentRegister(stuNum, name, sex, date, rel, token);
+    }
 }

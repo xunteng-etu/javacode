@@ -7,5 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface TeacherMapper {
+    /**
+     * 新增一条数据
+     * @param teacher
+     */
     void insert(Teacher teacher);
 }
