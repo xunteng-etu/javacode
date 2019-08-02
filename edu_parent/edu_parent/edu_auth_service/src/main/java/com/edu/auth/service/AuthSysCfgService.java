@@ -49,29 +49,29 @@ public class AuthSysCfgService {
             return resultVo;
         }
         String asid = RandomUtils.GET_ASID();
-        AuthSysCfg checkASID = authSysCfgMapper.selectByASID(asid);
-        //校验asid
-        if (checkASID != null) {
-            asid = RandomUtils.GET_ASID();
-        }
+//        AuthSysCfg checkASID = authSysCfgMapper.selectByASID(asid);
+//        //校验asid
+//        if (checkASID != null) {
+//            asid = RandomUtils.GET_ASID();
+//        }
         //校验clientID
         String clientID = RandomUtils.GET_CLIENT_ID();
-        AuthSysCfg checkClientID = authSysCfgMapper.selectByClientID(clientID);
-        if (checkClientID != null) {
-            clientID = RandomUtils.GET_CLIENT_ID();
-        }
+//        AuthSysCfg checkClientID = authSysCfgMapper.selectByClientID(clientID);
+//        if (checkClientID != null) {
+//            clientID = RandomUtils.GET_CLIENT_ID();
+//        }
         //校验clientSecret
         String clientSecret = RandomUtils.GET_CLIENT_SECRET();
-        AuthSysCfg checkClientSecret = authSysCfgMapper.selectByClientSecret(clientSecret);
-        if (checkClientSecret != null) {
-            clientSecret = RandomUtils.GET_CLIENT_SECRET();
-        }
+//        AuthSysCfg checkClientSecret = authSysCfgMapper.selectByClientSecret(clientSecret);
+//        if (checkClientSecret != null) {
+//            clientSecret = RandomUtils.GET_CLIENT_SECRET();
+//        }
         //校验clientKey
         String clientKey = RandomUtils.GET_CLIENT_KEY();
-        AuthSysCfg checkClientKey = authSysCfgMapper.selectByClientKey(clientKey);
-        if (checkClientKey != null) {
-            clientKey = RandomUtils.GET_CLIENT_KEY();
-        }
+//        AuthSysCfg checkClientKey = authSysCfgMapper.selectByClientKey(clientKey);
+//        if (checkClientKey != null) {
+//            clientKey = RandomUtils.GET_CLIENT_KEY();
+//        }
         AuthSysCfg authSysCfg = new AuthSysCfg();
         authSysCfg.setAsID(asid);
         authSysCfg.setClientName(clientName);
@@ -214,11 +214,6 @@ public class AuthSysCfgService {
 
         AuthSysLog log = new AuthSysLog();
         String asl_id = RandomUtils.GET_ASID();
-        //唯一校验
-        AuthSysLog authSysLog = authSysLogMapper.selectByASL_ID(asl_id);
-        if(authSysLog != null){
-            asl_id = RandomUtils.GET_ASID();
-        }
         log.setAslID(asl_id);
         log.setRequestTime(new Date());
         log.setRequestIP(ip);

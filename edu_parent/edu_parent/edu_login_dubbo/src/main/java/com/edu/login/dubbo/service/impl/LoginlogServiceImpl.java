@@ -20,15 +20,23 @@ public class LoginlogServiceImpl implements LoginlogService {
         return loginlogService.sendLoginCode(mobile, asid);
     }
 
-    public ResultVo codeLogin(String mobile, String code, String asid, String clientName) {
-        return loginlogService.codeLogin(mobile, code, asid, clientName);
+    public ResultVo codeLogin(String mobile, String code, String asid, String clientName, String roler) {
+        return loginlogService.codeLogin(mobile, code, asid, clientName, roler);
     }
 
-    public ResultVo pwdLogin(String mobile, String pwd, String asid, String clientName) {
-        return loginlogService.pwdLogin(mobile, pwd, asid, clientName);
+    public ResultVo pwdLogin(String mobile, String pwd, String asid, String clientName, String roler) {
+        return loginlogService.pwdLogin(mobile, pwd, asid, clientName, roler);
     }
 
     public ResultVo checkToken(String token) {
         return loginlogService.checkToken(token);
+    }
+
+    public ResultVo parentLoginStu(String parentID, String studentID, String token, String roler, String asid, String clientName) {
+        return loginlogService.parentLoginStu(parentID, studentID, token, roler, asid, clientName);
+    }
+
+    public ResultVo updateLoginType(String token, String type) {
+        return loginlogService.updateLoginType(token, type);
     }
 }

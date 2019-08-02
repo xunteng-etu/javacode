@@ -117,7 +117,7 @@ public class AccountService {
             return resultVo;
         }
         String resule = checkRegistered(mobile).getRt_code();
-        if (!"0".equals(resule)) {
+        if (!Constant.RESULT_CODE_SUCCES.equals(resule)) {
             resultVo.setRt_code(Constant.RESULT_CODE_MOBILEISEXISTS);
             resultVo.setRt_msg(Constant.RESULT_MSG_MOBILEISEXISTS);
         }
@@ -166,10 +166,6 @@ public class AccountService {
         try {
             Account account = new Account();
             String id = RandomUtils.GET_RANDOMSTRING(12);
-            Account check = accountMapper.selectByAid(id);
-            if (check != null) {
-                id = RandomUtils.GET_RANDOMSTRING(12);
-            }
             account.setId(id);
             account.setMobile(mobile);
             account.setCreateTime(new Date());

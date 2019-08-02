@@ -38,10 +38,6 @@ public class SmsTemplateService {
             return resultVo;
         }
         String stid = RandomUtils.GET_RANDOMSTRING(12);
-        SmsTemplate checkSTID = smsTemplateMapper.selectBySTID(stid);
-        if (checkSTID != null) {
-            stid = RandomUtils.GET_RANDOMSTRING(12);
-        }
         SmsTemplate smsTemplate = new SmsTemplate();
         smsTemplate.setStid(stid);
         smsTemplate.setCode(code);

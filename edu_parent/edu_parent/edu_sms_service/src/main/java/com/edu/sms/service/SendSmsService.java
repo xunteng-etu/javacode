@@ -98,10 +98,6 @@ public class SendSmsService {
             //请求成功
             if("OK".equals(map.get("Code"))){
                 SmsBase smsBase = new SmsBase();
-                SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
-                if (checkSid != null) {
-                    sid = RandomUtils.GET_RANDOMSTRING(12);
-                }
                 smsBase.setSid(sid);
                 smsBase.setAsid(asid);
                 smsBase.setTemplatecode(templatecode);
@@ -115,10 +111,6 @@ public class SendSmsService {
                 smsSuccessMapper.insert(smsBase);
             }else{
                 SmsError smsError = new SmsError();
-                SmsError checkSid = smsErrorMapper.selectBySid(sid);
-                if (checkSid != null) {
-                    sid = RandomUtils.GET_RANDOMSTRING(12);
-                }
                 smsError.setSid(sid);
                 smsError.setAsid(asid);
                 smsError.setTemplatecode(templatecode);
@@ -157,10 +149,6 @@ public class SendSmsService {
     public ResultVo addSmsWait(String asid, String signName, String templatecode, String telephone, String templateParam) {
         ResultVo resultVo = new ResultVo();
         String sid = RandomUtils.GET_RANDOMSTRING(12);
-        SmsBase checkSid = smsWaitMapper.selectBySid(sid);
-        if (checkSid != null) {
-            sid = RandomUtils.GET_RANDOMSTRING(12);
-        }
         try {
             SmsBase smsBase = new SmsBase();
             smsBase.setAsid(asid);

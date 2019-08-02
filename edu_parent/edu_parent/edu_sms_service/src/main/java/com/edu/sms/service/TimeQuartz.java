@@ -66,10 +66,6 @@ public class TimeQuartz {
                     if ("OK".equals(map.get("Code"))) {
                         //成功...
                         SmsBase smsBase = new SmsBase();
-                        SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
-                        if (checkSid != null) {
-                            sid = RandomUtils.GET_RANDOMSTRING(12);
-                        }
                         smsBase.setSid(sid);
                         smsBase.setAsid(smsBases.get(i).getAsid());
                         smsBase.setTemplatecode(smsBases.get(i).getTemplatecode());
@@ -85,10 +81,6 @@ public class TimeQuartz {
                     } else {
                         //失败...
                         SmsError smsError = new SmsError();
-                        SmsError checkSid = smsErrorMapper.selectBySid(sid);
-                        if (checkSid != null) {
-                            sid = RandomUtils.GET_RANDOMSTRING(12);
-                        }
                         smsError.setSid(sid);
                         smsError.setAsid(smsBases.get(i).getAsid());
                         smsError.setTemplatecode(smsBases.get(i).getTemplatecode());
@@ -141,10 +133,6 @@ public class TimeQuartz {
                     if ("OK".equals(map.get("Code"))) {
                         //成功...
                         SmsBase smsBase = new SmsBase();
-                        SmsBase checkSid = smsSuccessMapper.selectBySid(sid);
-                        if (checkSid != null) {
-                            sid = RandomUtils.GET_RANDOMSTRING(12);
-                        }
                         smsBase.setSid(sid);
                         smsBase.setAsid(smsErrors.get(i).getAsid());
                         smsBase.setTemplatecode(smsErrors.get(i).getTemplatecode());
