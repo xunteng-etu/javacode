@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface StudentMapper {
@@ -31,4 +33,35 @@ public interface StudentMapper {
      * @return
      */
     Student selectByStudentID(@Param("id") String id);
+
+    /**
+     * 多参数组合查询
+     *
+     * @param ids      id
+     * @param name     名称
+     * @param startAge 年龄段（大于等于）
+     * @param endAge   年龄段（小于等于）
+     * @param sex      性别
+     * @param pageNo   页码
+     * @param pageRow  行数
+     * @return
+     */
+    List<Student> selectByParams(@Param("ids") String ids, @Param("name") String name,
+                                 @Param("startAge") Integer startAge, @Param("endAge") Integer endAge,
+                                 @Param("sex") String sex,
+                                 @Param("pageNo") Integer pageNo, @Param("pageRow") Integer pageRow);
+
+    /**
+     * 多参数组合查询总数
+     *
+     * @param ids      id
+     * @param name     名称
+     * @param startAge 年龄段（大于等于）
+     * @param endAge   年龄段（小于等于）
+     * @param sex      性别
+     * @return
+     */
+    Integer selectCountByParams(@Param("ids") String ids, @Param("name") String name,
+                                @Param("startAge") Integer startAge, @Param("endAge") Integer endAge,
+                                @Param("sex") String sex);
 }

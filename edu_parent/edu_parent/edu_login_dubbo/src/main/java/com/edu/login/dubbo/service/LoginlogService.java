@@ -65,4 +65,6 @@ public interface LoginlogService {
      * @return
      */
     ResultVo updateLoginType(String token, String type);
+
+
 }

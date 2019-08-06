@@ -24,4 +24,39 @@
         insert into t_account_parent(A_ID,A_NAME,A_SEX,BARFDATE,A_AGE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
         values (#{aID},#{name},#{sex},#{barfdate},#{age},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
     </insert>
+
+    <select id="selectByID" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/> from t_account_parent where A_ID =#{id}
+    </select>
+
+    <select id="selectByParams" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_parent
+        where A_ID in (#{ids})
+        <if test="name != null and name != ''">
+            and A_NAME like "%"#{name}"%"
+        </if>
+        <if test="startAge != null and endAge != null">
+            and A_AGE between #{startAge} and #{endAge}
+        </if>
+        <if test="sex != null and sex != ''">
+            and A_SEX =#{sex}
+        </if>
+        limit #{pageNo},#{pageRow}
+    </select>
+
+    <select id="selectCountByParams" resultType="java.lang.Integer">
+        select count(*) from t_account_parent
+        where A_ID in (#{ids})
+        <if test="name != null and name != ''">
+            and A_NAME like "%"#{name}"%"
+        </if>
+        <if test="startAge != null and endAge != null">
+            and A_AGE between #{startAge} and #{endAge}
+        </if>
+        <if test="sex != null and sex != ''">
+            and A_SEX =#{sex}
+        </if>
+    </select>
 </mapper>

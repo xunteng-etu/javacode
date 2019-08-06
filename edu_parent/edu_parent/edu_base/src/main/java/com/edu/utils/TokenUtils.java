@@ -145,5 +145,11 @@ public class TokenUtils {
        // List<ProductInfo> productInfos =  productInfoList.stream().filter(productInfo -> productInfo.getIsSalePack()==IS_SALETACK).collect(Collectors.toList());
        // Map<String,List<ProductInfo>> productInfos =  productInfoList.stream().filter(productInfo -> productInfo.getIsSalePack()==IS_SALETACK).collect(Collectors.groupingBy(ProductInfo::getPackCode));
 
+        String ids = "12,13,15,18";
+        System.out.println(ids.endsWith(","));
+        if(ids.endsWith(",")){
+            ids = ids.substring(0,ids.length()-1);
+        }
+        System.out.println(ids);
     }
 }

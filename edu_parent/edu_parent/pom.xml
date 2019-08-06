@@ -15,7 +15,8 @@
         <module>edu_auth_service</module>
         <module>edu_auth_dubbo</module>
         <module>edu_auth_client</module>
-        <!--sms-->
+
+        <!--        sms-->
         <module>edu_sms_dao</module>
         <module>edu_sms_model</module>
         <module>edu_sms_service</module>
@@ -27,14 +28,22 @@
         <module>edu_account_dao</module>
         <module>edu_account_service</module>
         <module>edu_account_dubbo</module>
+        <module>edu_account_client</module>
 
         <!--        base-->
         <module>edu_base</module>
+
         <!--        test-->
         <module>edu_auth_test</module>
-        <module>edu_account_client</module>
+
+        <!--        login-->
         <module>edu_login_dubbo</module>
         <module>edu_login_client</module>
+
+        <!--        info-->
+        <module>edu_info_dubbo</module>
+        <module>edu_info_client</module>
+
 
     </modules>
     <properties>
@@ -121,12 +130,12 @@
             </dependency>
             <dependency>
                 <groupId>com.edu</groupId>
-                <artifactId>edu_login_dubbo</artifactId>
+                <artifactId>edu_account_client</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.edu</groupId>
-                <artifactId>edu_account_client</artifactId>
+                <artifactId>edu_login_dubbo</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -134,7 +143,16 @@
                 <artifactId>edu_login_client</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.edu</groupId>
+                <artifactId>edu_info_dubbo</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.edu</groupId>
+                <artifactId>edu_info_client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!--            base-->
             <dependency>
                 <groupId>com.edu</groupId>

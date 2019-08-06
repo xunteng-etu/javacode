@@ -27,12 +27,47 @@
     </insert>
 
     <select id="selectByStuNum" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/> from t_account_stu
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_stu
         where A_STU_NUM = #{stuNum}
     </select>
 
     <select id="selectByStudentID" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select <include refid="Base_Column_List"/> from t_account_stu
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_stu
         where A_ID = #{id}
+    </select>
+
+    <select id="selectByParams" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_account_stu
+        where A_ID in (#{ids})
+        <if test="name != null and name != ''">
+            and A_NAME like "%"#{name}"%"
+        </if>
+        <if test="startAge != null and endAge != null">
+            and A_AGE between #{startAge} and #{endAge}
+        </if>
+        <if test="sex != null and sex != ''">
+            and A_SEX =#{sex}
+        </if>
+        limit #{pageNo},#{pageRow}
+    </select>
+
+    <select id="selectCountByParams" resultType="java.lang.Integer">
+        select count(*) from t_account_stu
+        where A_ID in (#{ids})
+        <if test="name != null and name != ''">
+            and A_NAME like "%"#{name}"%"
+        </if>
+        <if test="startAge != null and endAge != null">
+            and A_AGE between #{startAge} and #{endAge}
+        </if>
+        <if test="sex != null and sex != ''">
+            and A_SEX =#{sex}
+        </if>
     </select>
 </mapper>
