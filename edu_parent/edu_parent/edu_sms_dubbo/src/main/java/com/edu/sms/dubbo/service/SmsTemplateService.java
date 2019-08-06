@@ -12,7 +12,7 @@ public interface SmsTemplateService {
      * @param remark  备注
      * @return
      */
-    public ResultVo add(String code, String details, String remark);
+    ResultVo add(String code, String details, String remark);
 
     /**
      * 修改短信发送模板
@@ -23,7 +23,7 @@ public interface SmsTemplateService {
      * @param remark  备注
      * @return
      */
-    public ResultVo update(String stid, String code, String details, String remark);
+    ResultVo update(String stid, String code, String details, String remark);
 
     /**
      * 删除短信发送模板（逻辑删除）
@@ -31,7 +31,7 @@ public interface SmsTemplateService {
      * @param stid 短信模板标识
      * @return
      */
-    public ResultVo delete(String stid);
+    ResultVo delete(String stid);
 
     /**
      * 根据STID查询短信模板
@@ -39,7 +39,7 @@ public interface SmsTemplateService {
      * @param stid
      * @return
      */
-    public ResultVo selectBySTID(String stid);
+    ResultVo selectBySTID(String stid);
 
     /**
      * 分页查询所有

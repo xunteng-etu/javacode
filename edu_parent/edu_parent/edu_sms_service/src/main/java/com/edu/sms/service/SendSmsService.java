@@ -172,44 +172,6 @@ public class SendSmsService {
     }
 
     public static void main(String[] args) {
-//        DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
-//        IAcsClient client = new DefaultAcsClient(profile);
-//
-//        CommonRequest request = new CommonRequest();
-//        request.setMethod(MethodType.POST);
-//        request.setDomain(sendSmsAddress);
-//        request.setVersion(sendSmsVersion);
-//        request.setAction(sendSmsAction);
-//        request.putQueryParameter("PhoneNumbers", "13750466276");
-//        request.putQueryParameter("SignName", "WeLearning");
-//        request.putQueryParameter("TemplateCode", "SMS_170420060");
-//        request.putQueryParameter("TemplateParam", "{\"code\":\"1234\"}");
-//        String sid = RandomUtils.GET_RANDOMSTRING(12);
-//        try {
-//            CommonResponse response = client.getCommonResponse(request);
-//            String result = response.getData();
-//            System.out.println(result);
-//
-//            CommonRequest queryRequest = new CommonRequest();
-//            queryRequest.setMethod(MethodType.POST);
-//            queryRequest.setDomain("dysmsapi.aliyuncs.com");
-//            queryRequest.setVersion("2017-05-25");
-//            queryRequest.setAction("QuerySendDetails");
-//            queryRequest.putQueryParameter("RegionId", "cn-shenzhen");
-//            queryRequest.putQueryParameter("PhoneNumber", "13750466276");
-//            queryRequest.putQueryParameter("SendDate", "20190723");
-//            queryRequest.putQueryParameter("PageSize", "10");
-//            queryRequest.putQueryParameter("CurrentPage", "1");
-//            queryRequest.putQueryParameter("BizId", "748810063851591923^0");
-//            try {
-//                CommonResponse queryResponse = client.getCommonResponse(queryRequest);
-//                System.out.println(queryResponse.getData());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }catch (Exception e){
-//            e.printStackTrace();
-//        }
         String result = "{\"Message\":\"OK\",\"RequestId\":\"598D34B5-7AF1-4F42-ABFF-84F82B98CADA\",\"BizId\":\"392700763851915113^0\",\"Code\":\"OK\"}";
         Map map = (Map) JSON.parse(result);
         System.out.println(map.get("Message").toString());
