@@ -3,10 +3,15 @@ package com.edu.account.service;
 import com.edu.account.dao.mapper.ParentMapper;
 import com.edu.account.dao.mapper.StudentMapper;
 import com.edu.account.dao.mapper.TeacherMapper;
+import com.edu.account.model.entity.Parent;
+import com.edu.account.model.entity.Student;
+import com.edu.account.model.entity.Teacher;
 import com.edu.base.Constant;
 import com.edu.base.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Date;
 
 /**
  * @program: edu_parent
@@ -402,6 +407,69 @@ public class InfoService {
         resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
         resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
         resultVo.setRt_data(studentMapper.selectCountByParams(ids, name, startAge, endAge, sex));
+        return resultVo;
+    }
+
+    /**
+     * 修改教师信息
+     *
+     * @param teacher
+     * @return
+     */
+    public ResultVo updateTeacher(Teacher teacher) {
+        ResultVo resultVo = new ResultVo();
+        if (teacher.getAid() == null || "".equals(teacher.getAid())) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
+            return resultVo;
+        }
+        teacher.setUpdateTime(new Date());
+        teacherMapper.update(teacher);
+        resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
+        resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
+        resultVo.setRt_data(teacher);
+        return resultVo;
+    }
+
+    /**
+     * 修改家长信息
+     *
+     * @param parent
+     * @return
+     */
+    public ResultVo updateParent(Parent parent) {
+        ResultVo resultVo = new ResultVo();
+        if (parent.getAid() == null || "".equals(parent.getAid())) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
+            return resultVo;
+        }
+        parent.setUpdateTime(new Date());
+        parentMapper.update(parent);
+        resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
+        resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
+        resultVo.setRt_data(parent);
+        return resultVo;
+    }
+
+    /**
+     * 修改学生信息
+     *
+     * @param student
+     * @return
+     */
+    public ResultVo updateStudent(Student student) {
+        ResultVo resultVo = new ResultVo();
+        if (student.getAid() == null || "".equals(student.getAid())) {
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+            resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
+            return resultVo;
+        }
+        student.setUpdateTime(new Date());
+        studentMapper.update(student);
+        resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);
+        resultVo.setRt_msg(Constant.RESULT_MSG_SUCCES);
+        resultVo.setRt_data(student);
         return resultVo;
     }
 }

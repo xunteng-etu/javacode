@@ -55,4 +55,11 @@ public interface ParentMapper {
     Integer selectCountByParams(@Param("ids") String ids, @Param("name") String name,
                                 @Param("startAge") Integer startAge, @Param("endAge") Integer endAge,
                                 @Param("sex") String sex);
+
+    /**
+     * 修改
+     *
+     * @param parent
+     */
+    void update(Parent parent);
 }

@@ -56,4 +56,10 @@ public interface TeacherMapper {
                                 @Param("startAge") Integer startAge, @Param("endAge") Integer endAge,
                                 @Param("sex") String sex);
 
+    /**
+     * 修改
+     * @param teacher
+     */
+    void update(Teacher teacher);
+
 }

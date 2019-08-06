@@ -14,7 +14,7 @@ import java.util.Date;
  */
 @Data
 public class Parent extends BaseEntity implements Serializable {
-    private String aID;
+    private String aid;
     private String name;
     private String sex;
     private Date barfdate;

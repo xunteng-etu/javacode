@@ -4,7 +4,7 @@
 <mapper namespace="com.edu.account.dao.mapper.ParentMapper">
 
     <resultMap id="BaseResultMap" type="com.edu.account.model.entity.Parent">
-        <id column="A_ID" property="aID"/>
+        <id column="A_ID" property="aid"/>
         <result column="A_NAME" property="name"/>
         <result column="A_SEX" property="sex"/>
         <result column="BARFDATE" property="barfdate"/>
@@ -22,7 +22,7 @@
 
     <insert id="insert" parameterType="Parent">
         insert into t_account_parent(A_ID,A_NAME,A_SEX,BARFDATE,A_AGE,SERIAL,REMARK,SYS_STATUS,CREATE_TIME,UPDATE_TIME,VALUE_FLAG)
-        values (#{aID},#{name},#{sex},#{barfdate},#{age},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
+        values (#{aid},#{name},#{sex},#{barfdate},#{age},#{serial},#{remark},#{sysStatus},#{createTime},#{updateTime},#{valueFlag})
     </insert>
 
     <select id="selectByID" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -59,4 +59,22 @@
             and A_SEX =#{sex}
         </if>
     </select>
+
+    <update id="update" parameterType="Parent">
+        update t_account_parent
+        set UPDATE_TIME = #{updateTime}
+        <if test="name != null and name != ''">
+            ,A_NAME = #{name}
+        </if>
+        <if test="sex != null and sex != ''">
+            ,A_SEX = #{sex}
+        </if>
+        <if test="barfdate != null and barfdate != ''">
+            ,BARFDATE = #{barfdate}
+        </if>
+        <if test="age != null and age != ''">
+            ,A_AGE = #{age}
+        </if>
+        where A_ID = #{aid}
+    </update>
 </mapper>

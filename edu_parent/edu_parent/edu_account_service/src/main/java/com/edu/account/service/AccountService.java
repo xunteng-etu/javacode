@@ -176,7 +176,7 @@ public class AccountService {
             if (roler.equals("1")) {
                 //教师
                 Teacher teacher = new Teacher();
-                teacher.setAID(id);
+                teacher.setAid(id);
                 teacher.setCreateTime(new Date());
                 teacher.setSerial(0);
                 teacher.setSysStatus("1");
@@ -185,7 +185,7 @@ public class AccountService {
             } else if (roler.equals("2")) {
                 //家长
                 Parent parent = new Parent();
-                parent.setAID(id);
+                parent.setAid(id);
                 parent.setCreateTime(new Date());
                 parent.setSerial(0);
                 parent.setSysStatus("1");
@@ -194,7 +194,7 @@ public class AccountService {
             } else if (roler.equals("3")) {
                 //学生
                 Student student = new Student();
-                student.setAID(id);
+                student.setAid(id);
                 student.setCreateTime(new Date());
                 student.setSerial(0);
                 student.setSysStatus("1");
@@ -261,7 +261,7 @@ public class AccountService {
         parentStudentRel.setValueFlag("1");
         //绑定到家长与学生关系表
         if (student != null) {
-            ParentStudentRel ps = parentStudentRelMapper.selectByParentIDAndStuID(parent.getId(),student.getAID());
+            ParentStudentRel ps = parentStudentRelMapper.selectByParentIDAndStuID(parent.getId(),student.getAid());
             //已经绑定过
             if(ps != null){
                 resultVo.setRt_code(Constant.RESULT_CODE_WONGSTUBING);
@@ -269,7 +269,7 @@ public class AccountService {
                 resultVo.setRt_data(student);
                 return resultVo;
             }
-            parentStudentRel.setStudentID(student.getAID());
+            parentStudentRel.setStudentID(student.getAid());
             parentStudentRelMapper.insert(parentStudentRel);
             resultVo.setRt_code(Constant.RESULT_CODE_STUISREGISTER);
             resultVo.setRt_msg(Constant.RESULT_MSG_STUISREGISTER);
@@ -286,7 +286,7 @@ public class AccountService {
             accountMapper.insert(account);
             //新增学生信息
             Student stu = new Student();
-            stu.setAID(aid);
+            stu.setAid(aid);
             stu.setName(name);
             stu.setSex(sex);
             stu.setBarfdate(date);
@@ -297,7 +297,7 @@ public class AccountService {
             stu.setCreateTime(new Date());
             studentMapper.insert(stu);
             //绑定家长与学生关系
-            parentStudentRel.setStudentID(stu.getAID());
+            parentStudentRel.setStudentID(stu.getAid());
             parentStudentRelMapper.insert(parentStudentRel);
 
             resultVo.setRt_code(Constant.RESULT_CODE_SUCCES);

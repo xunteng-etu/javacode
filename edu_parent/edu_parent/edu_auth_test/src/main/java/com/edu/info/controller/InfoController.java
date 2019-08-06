@@ -1,12 +1,12 @@
 package com.edu.info.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.edu.account.model.entity.Parent;
+import com.edu.account.model.entity.Student;
+import com.edu.account.model.entity.Teacher;
 import com.edu.base.ResultVo;
 import com.edu.info.dubbo.service.InfoService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @program: edu_parent
@@ -154,4 +154,19 @@ public class InfoController {
         return infoService.selectStudentByParam(ids, name, startAge, endAge, sex, pageNo, pageRow);
     }
 
+    @RequestMapping(value = "updateTeacher", method = RequestMethod.POST)
+    public ResultVo updateTeacher(@RequestBody Teacher teacher) {
+        return infoService.updateTeacher(teacher);
+    }
+
+    @RequestMapping(value = "updateParent", method = RequestMethod.POST)
+    public ResultVo updateParent(@RequestBody Parent parent) {
+        return infoService.updateParent(parent);
+    }
+
+    @RequestMapping(value = "updateStudent", method = RequestMethod.POST)
+    public ResultVo updateStudent(@RequestBody Student student) {
+        System.out.println(student.toString());
+        return infoService.updateStudent(student);
+    }
 }

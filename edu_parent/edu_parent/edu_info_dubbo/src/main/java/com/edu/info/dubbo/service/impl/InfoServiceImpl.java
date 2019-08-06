@@ -1,6 +1,9 @@
 package com.edu.info.dubbo.service.impl;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.edu.account.model.entity.Parent;
+import com.edu.account.model.entity.Student;
+import com.edu.account.model.entity.Teacher;
 import com.edu.base.ResultVo;
 import com.edu.info.dubbo.service.InfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +55,17 @@ public class InfoServiceImpl implements InfoService {
 
     public ResultVo selectStudentCountByParam(String ids, String name, Integer startAge, Integer endAge, String sex) {
         return infoService.selectStudentCountByParam(ids, name, startAge, endAge, sex);
+    }
+
+    public ResultVo updateTeacher(Teacher teacher) {
+        return infoService.updateTeacher(teacher);
+    }
+
+    public ResultVo updateParent(Parent parent) {
+        return infoService.updateParent(parent);
+    }
+
+    public ResultVo updateStudent(Student student) {
+        return infoService.updateStudent(student);
     }
 }

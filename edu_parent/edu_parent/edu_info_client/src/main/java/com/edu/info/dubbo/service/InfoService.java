@@ -1,5 +1,8 @@
 package com.edu.info.dubbo.service;
 
+import com.edu.account.model.entity.Parent;
+import com.edu.account.model.entity.Student;
+import com.edu.account.model.entity.Teacher;
 import com.edu.base.ResultVo;
 
 public interface InfoService {
@@ -146,4 +149,28 @@ public interface InfoService {
      * @return
      */
     ResultVo selectStudentCountByParam(String ids, String name, Integer startAge, Integer endAge, String sex);
+
+    /**
+     * 修改教师信息
+     *
+     * @param teacher
+     * @return
+     */
+    ResultVo updateTeacher(Teacher teacher);
+
+    /**
+     * 修改家长信息
+     *
+     * @param parent
+     * @return
+     */
+    ResultVo updateParent(Parent parent);
+
+    /**
+     * 修改学生信息
+     *
+     * @param student
+     * @return
+     */
+    ResultVo updateStudent(Student student);
 }

@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 public class Student extends BaseEntity implements Serializable {
-    private String aID;
+    private String aid;
     private String name;
     private String sex;
     private String barfdate;
