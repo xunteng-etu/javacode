@@ -77,7 +77,7 @@ public class AccountService {
     public ResultVo createPwd(String id, String pwd) {
         ResultVo resultVo = new ResultVo();
         if ("".equals(id) || "".equals(pwd)) {
-            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM);
+            resultVo.setRt_code(Constant.RESULT_CODE_WONGPARAM) ;
             resultVo.setRt_msg(Constant.RESULT_MSG_WONGPARAM);
             return resultVo;
         }
